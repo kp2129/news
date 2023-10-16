@@ -9,6 +9,6 @@
     <title>Ziņas</title>
 </head>
 <body>
-    
+    <main></main>
 </body>
 </html>
