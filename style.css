@@ -77,3 +77,43 @@ footer {
 .side-news-other {
     display: flex;
 }
+
+/* ------------------------------------------------------ Single view -------------------------------------------------------------- */
+
+.cont{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid black; */
+}
+.nav{
+    height: 10%;
+    width: 100%;
+    background-color: #E0DA3F;
+    display: flex;
+    justify-content: space-between;
+}
+.logo{
+    width: 10%;
+    height: 100%;
+    /* border: 1px solid black; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.logo h1{
+    color:rgb(249, 121, 82);
+}
+.log{
+    height: 100%;
+    width: 10%;
+    /* border: 1px solid black; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.log a{
+    text-decoration: none;
+    color: black;
+}
