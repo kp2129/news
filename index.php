@@ -13,7 +13,7 @@ include_once('components/navbar.php')
     <script src="scripts/scripts.js"></script>
     <link rel="stylesheet" href="styles/navbar.css">
     <link rel="stylesheet" href="styles/index.css">
-    <title>Document</title>
+    <title>NEWS</title>
 </head>
 
 <body>
