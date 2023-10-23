@@ -148,12 +148,13 @@ footer {
 }
 .main{
     /* border: 1px solid black; */
-    height: 85%;
+    height: auto;
     width: 100%;
+    display: flex;
 }
 .left{
     width: 65%;
-    height: 100%;
+    height: auto;
     /* border: 1px solid black; */
     display: flex;
     flex-direction: column;
@@ -176,6 +177,24 @@ footer {
 }
 .single-details{
     width: 95%;
+    height: auto;
     margin-top: 20px;
     height: 20vh;
+}
+.right{
+    width: 35%;
+    height: 100%;
+    border: 1px solid black;
+}
+.right h1{
+    margin: 20px;
+}
+.desc{
+    width: 95%;
+    height: auto;
+    border: 1px solid black;
+    margin-top: 20px;
+}
+.desc p{
+    font-size: 18px;
 }
