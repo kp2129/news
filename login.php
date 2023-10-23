@@ -1,3 +1,7 @@
+<?php
+include_once('components/navbar.php')
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +11,8 @@
     <title>Login</title>
     <link rel="stylesheet"  href="style.css">
     <link rel="stylesheet" href="styles/index.css">
-    
+    <link rel="stylesheet" href="styles/navbar.css">
+
     <title>Login</title>
 </head>
 <body>
