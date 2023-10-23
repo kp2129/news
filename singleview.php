@@ -1,51 +1,99 @@
+<?php
+include_once('components/navbar.php')
+
+// skatās pēc $_GET['id'], saskaņot ar DB
+
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/navbar.css">
+    <link rel="stylesheet" href="styles/post.css">
     <title>Document</title>
-    <link rel="stylesheet" href="http://localhost/news/styles/style.css">
-    <link rel="stylesheet" href="http://localhost/news/styles/navbar.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
-<body class = "single">
-    <div class="cont">
-        <div class="border">
-            <?php include "../news/components/navbar.php"; ?>
-            <div class="main">
-                <div class="left">
-                    <div class="single-img">
-                        <img src="https://www.e90post.com/forums/attachment.php?attachmentid=17216&stc=1&d=1141159310" />
-                    </div>
-                    <div class="single-details">
-                        <h1>Be awere of fake glouries 320d</h1>
-                        <p>Molberts • 17.10.2023 • 58,930</p>
-                        <div class="desc">
-                            <p>Vladimirs Putins ir Krievijas prezidents kopš 2012. gada. Viņš ir bijis pie varas vairāk nekā divas desmitgades - vai nu kā prezidents, vai kā premjerministrs. Viņš ir bijušais KGB virsnieks, kurš izcēlās Borisa Jeļcina laikā. Viņš ir īstenojis nacionālistisku un autoritāru darba kārtību un ir kritizēts par cilvēktiesību stāvokli, ārpolitiku un iekšējām represijām. Viņš ir arī grozījis konstitūciju, lai varētu kandidēt uz prezidenta amatu.</p>
-                        </div>
-                    </div>
+
+<!-- content vietā var ielikt no DB php variables -->
+
+<!-- priekš jums sadaļā pirmie 3 (izņemot to kuru jau skatās) ierakstus -->
+<!-- mazo ierakstu TITLE jābūt samazinātam līdz 40 characters. Ja ir vairāk, noīsināt uz 37 un ielikt 3 punktus -->
+
+<!-- like poga varianti: bi-hand-thumbs-up, bi-hand-thumbs-up-fill, atkarībā vai lietotājs ir spiedis "like" šim ierakstam -->
+
+<body>
+    <div class="container">
+        <!-- kreisā daļa (Post sadaļa) -->
+        <div class="post-container">
+            <button class="post-like-button button-style">
+                <i class="bi bi-hand-thumbs-up"></i>
+            </button>
+            <img class="post-image" src="https://ichef.bbci.co.uk/news/976/cpsprodpb/EF66/production/_98268216_gettyimages-826469180-1.jpg.webp" alt="">
+            <p class="post-title">$TITLE</p>
+
+            <div class="post-details-container">
+                <p class="post-details">$AUTORS • $CREATION_DATE • $LIKE_COUNT</p>
+                <i class="bi bi-hand-thumbs-up-fill"></i>
+            </div>
+
+            <div class="post-content-container">
+                <p class="post-content">
+                    $CONTENT
+                </p>
+            </div>
+
+            <!-- KOMENTĀRI -->
+            <div class="comments-container">
+                <p class="section-title">
+                    Komentāri
+                </p>
+                <!-- forma -->
+                <div class="comment-submit-container">
+                    <textarea name="" id="" cols="30" rows="10" class="comment-input">Ievadi komentāru!</textarea>
+                    <button class="comment-submit-button button-style">Publicēt</button>
                 </div>
-                <div class="right">
-                    <h1>Priekš Jums</h1>
-                    <div class="more">
-                        <div class="img">
-                        <img src="https://e46m3.bimmerpost.com/forums/attachment.php?attachmentid=2271188&stc=1&d=1585532201" alt="">
-                        <div class = "img-more"><p>“LOL JK” - Putins izs...</p><a href="">Lasīt talāk</a></div>
-                        </div>
-                        <div class="img">
-                        <img src="https://e46m3.bimmerpost.com/forums/attachment.php?attachmentid=2271188&stc=1&d=1585532201" alt="">
-                        <div class = "img-more"><p>“LOL JK” - Putins izs...</p><a href="">Lasīt talāk</a></div>
-                        </div>
-                        <div class="img">
-                        <img src="https://e46m3.bimmerpost.com/forums/attachment.php?attachmentid=2271188&stc=1&d=1585532201" alt="">
-                        <div class = "img-more"><p>“LOL JK” - Putins izs...</p><a href="">Lasīt talāk</a></div>
-                        </div>
+                <!-- komentāri  -->
+                <!-- LAI RĀDĪTU KOMENTĀRUS, KOPĒT comment-entry-container un ievadīt katra komentāra datus -->
+                <div class="comment-entry-container">
+                    <div class="comment-head">
+                        <p class="comment-author">$AUTHOR</p>
+                        <p class="comment-date">$DATE</p>
                     </div>
+                    <p class="comment-content">$CONTENT</p>
+                </div>
+                <div class="comment-entry-container">
+                    <div class="comment-head">
+                        <p class="comment-author">Author</p>
+                        <p class="comment-date">2023-10-23</p>
+                    </div>
+                    <p class="comment-content">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur at aliquam, minima, quod incidunt quas vel pariatur ad dignissimos distinctio iure, iste odit! Optio laudantium quod, ad quisquam iusto commodi.</p>
                 </div>
             </div>
+
+        </div>
+
+        <!-- labā daļa (Priekš jums sadaļa) -->
+        <div class="suggestions-container">
+            <p class="suggestions-title">
+                Priekš Jums
+            </p>
+            <a href="#" class="m-post-container">
+                <img class="m-post-image" src="https://ichef.bbci.co.uk/news/976/cpsprodpb/EF66/production/_98268216_gettyimages-826469180-1.jpg.webp" alt="">
+                <p class="m-post-title">LOL JK, Putins izsaka. Mediji pārstei...</p>
+            </a>
+
+            <a href="#" class="m-post-container">
+                <img class="m-post-image" src="https://ichef.bbci.co.uk/news/976/cpsprodpb/EF66/production/_98268216_gettyimages-826469180-1.jpg.webp" alt="">
+                <p class="m-post-title">LOL JK, Putins izsaka. Mediji pārstei...</p>
+            </a>
+
+            <a href="#" class="m-post-container">
+                <img class="m-post-image" src="https://ichef.bbci.co.uk/news/976/cpsprodpb/EF66/production/_98268216_gettyimages-826469180-1.jpg.webp" alt="">
+                <p class="m-post-title">LOL JK, Putins izsaka. Mediji pārstei...</p>
+            </a>
         </div>
     </div>
 </body>
+
 </html>
