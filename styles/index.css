@@ -1,0 +1,87 @@
+.container {
+    margin: 0rem 5rem;
+}
+
+/* pirmie 2 */
+.top-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.l-post-container {
+    text-decoration: none;
+    color: var(--text);
+    font-weight: bold;
+    font-size: 1.25rem;
+
+    display: flex;
+    flex-direction: column;
+    width: 39.75rem;
+    gap: 0.5rem;
+}
+
+.l-post-title {
+    margin: 0;
+}
+
+.l-post-image {
+    border-radius: 15px;
+    width: 100%;
+}
+
+.l-post-like-count {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: absolute;
+
+    background-color: var(--bg-other);
+
+    border-radius: 50px;
+
+    margin: 0.5rem;
+}
+
+.l-post-like-count p {
+    margin: 0;
+    margin-right: 0.25rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+.l-post-like-count i {
+    font-size: 0.9rem;
+}
+
+/* pārējie */
+
+.bottom-container {
+    margin-top: 2rem;
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.m-post-container {
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 600;
+    font-size: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    width: 19rem;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.m-post-title {
+    margin: 0;
+}
+
+.m-post-image {
+    border-radius: 15px;
+    width: 100%;
+}
