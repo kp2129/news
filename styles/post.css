@@ -48,6 +48,78 @@ p {
 .post-like-button i {
     font-size: 1.25rem;
 }
+
+/* KOMENTĀRI */
+
+.comments-container {
+    width: 100%;
+
+    margin: 1rem 0rem;
+}
+
+.section-title {
+    font-size: 2.25rem;
+    font-weight: bold;
+    margin-bottom: 0.5srem;
+}
+
+/* KOMENTĀRU FORMA */
+.comment-submit-container {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    width: 100%;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.comment-input {
+    width: 99%;
+    height: 5rem;
+    resize: none;
+
+    margin: none;
+    padding: 0rem;
+    border-radius: 5px;
+    border-width: 0.2rem;
+    border-color: var(--bg-other);
+}
+
+.comment-submit-button {
+    width: fit-content;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.25rem 0.65rem;
+    border-radius: 10px;
+}
+
+/* KOMENTĀRS */
+
+.comment-entry-container {
+    background-color: var(--bg-other);
+
+    border-radius: 15px;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.comment-head {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    gap: 0.5rem;
+}
+
+.comment-author {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+.comment-date {
+    font-weight: 300;
+    font-size: 0.9rem;
+}
+
 /* labā daļa */
 
 .suggestions-container {
