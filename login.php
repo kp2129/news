@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet"  href="style.css">
+    <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/index.css">
-    
+
     <title>Login</title>
 </head>
+
 <body>
 
-<header></header>
+    <header></header>
     <div class="container">
         <h1>Login</h1>
         <form action="process_file.php" method="post">
@@ -33,5 +35,6 @@
         </form>
     </div>
 
-    </body>
+</body>
+
 </html>

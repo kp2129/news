@@ -12,7 +12,8 @@ include_once('components/navbar.php')
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/navbar.css">
     <link rel="stylesheet" href="styles/post.css">
-    <title>Document</title>
+    <!-- POST TITLE SAMAZINÁT LÍDZ APMÉRAM 7 CHARACTERIEM -->
+    <title>$TITLE</title>
 </head>
 
 <!-- content vietā var ielikt no DB php variables -->
