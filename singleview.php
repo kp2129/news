@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="http://localhost/news/styles/style.css">
+    <link rel="stylesheet" href="http://localhost/news/styles/navbar.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -12,21 +13,7 @@
 <body class = "single">
     <div class="cont">
         <div class="border">
-            <div class="nav">
-                <div class="logo"><h1>NEWS</h1></div>
-                <div class="select">
-                    <a href="">Ziņas</a>
-                    <a href="">Sports</a>
-                    <a href="">Mūzika</a>
-                    <a href="">Dārzs</a>
-                    <a href="">Izklaides</a>
-                </div>
-                <div class="login">
-                    <a href="" class = "log">pieslēgties</a>
-                    <a href="" class = "icon"><span class="material-symbols-outlined">menu</span></a>
-                    <a href="" class = "icon"><span class="material-symbols-outlined">search</span></a>
-                </div>
-            </div>
+            <?php include "../news/components/navbar.php"; ?>
             <div class="main">
                 <div class="left">
                     <div class="single-img">
