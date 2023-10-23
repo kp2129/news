@@ -44,11 +44,24 @@ include_once('components/navbar.php')
             </div>
 
             <!-- KOMENTĀRI -->
-            <!-- NAV PABEIGTS - NEAIZTIKT -->
             <div class="comments-container">
                 <p class="section-title">
                     Komentāri
                 </p>
+                <!-- forma -->
+                <div class="comment-submit-container">
+                    <textarea name="" id="" cols="30" rows="10" class="comment-input">Ievadi komentāru!</textarea>
+                    <button class="comment-submit-button button-style">Publicēt</button>
+                </div>
+                <!-- komentāri  -->
+                <!-- LAI RĀDĪTU KOMENTĀRUS, KOPĒT comment-entry-container un ievadīt katra komentāra datus -->
+                <div class="comment-entry-container">
+                    <div class="comment-head">
+                        <p class="comment-author">$AUTHOR</p>
+                        <p class="comment-date">$DATE</p>
+                    </div>
+                    <p class="comment-content">$CONTENT</p>
+                </div>
                 <div class="comment-entry-container">
                     <div class="comment-head">
                         <p class="comment-author">Author</p>

@@ -14,7 +14,7 @@ include_once('components/navbar.php')
     <title>Document</title>
 </head>
 
-<body class = "index">
+<body>
     <!-- saņem no DB visus ierakstus. pirmie 2 ir lielie, pārējie ir mazie varianti -->
     <!-- skatīt pēc figma stila -->
     <div class="container">
