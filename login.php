@@ -9,8 +9,7 @@ include_once('components/navbar.php')
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet"  href="style.css">
-    <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet"  href="styles/style.css">
     <link rel="stylesheet" href="styles/navbar.css">
 
     <title>Login</title>
@@ -22,14 +21,12 @@ include_once('components/navbar.php')
         <h1>Login</h1>
         <form action="process_file.php" method="post">
             <div class="form-group">
+                <label>Lietotājvārds</label>
                 <input type="text" id="username" name="username" placeholder="Email adress" required>
             </div>
             <div class="form-group">
+            <label>Parole</label>
                 <input type="password" id="password" name="password" placeholder="Password" required>
-            </div>
-            <div class="form-group" style="justify-content: flex-start;">
-                <input type="checkbox" name="remember" id="remember">
-                <label style="margin: 10px;" for="remember">Remember me</label>
             </div>
             <input type="submit" value="Pieslēgties">
             <div class="form-group">
