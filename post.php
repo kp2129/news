@@ -42,6 +42,22 @@ include_once('components/navbar.php')
                     $CONTENT
                 </p>
             </div>
+
+            <!-- KOMENTĀRI -->
+            <!-- NAV PABEIGTS - NEAIZTIKT -->
+            <div class="comments-container">
+                <p class="section-title">
+                    Komentāri
+                </p>
+                <div class="comment-entry-container">
+                    <div class="comment-head">
+                        <p class="comment-author">Author</p>
+                        <p class="comment-date">2023-10-23</p>
+                    </div>
+                    <p class="comment-content">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur at aliquam, minima, quod incidunt quas vel pariatur ad dignissimos distinctio iure, iste odit! Optio laudantium quod, ad quisquam iusto commodi.</p>
+                </div>
+            </div>
+
         </div>
 
         <!-- labā daļa (Priekš jums sadaļa) -->
