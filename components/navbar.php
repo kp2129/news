@@ -24,6 +24,9 @@
             </div>
         </div>
         <div class="right-side">
+            <button class = "dark-button s-button-style">
+                <i class="bi bi-sun"></i>
+            </button>
             <button class="login-button button-style">
                 Pieslēgties
             </button>
