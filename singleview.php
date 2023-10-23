@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="http://localhost/news/styles/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -40,7 +40,23 @@
                         </div>
                     </div>
                 </div>
-                <div class="right"><h1>Priekš Jums</h1></div>
+                <div class="right">
+                    <h1>Priekš Jums</h1>
+                    <div class="more">
+                        <div class="img">
+                        <img src="https://e46m3.bimmerpost.com/forums/attachment.php?attachmentid=2271188&stc=1&d=1585532201" alt="">
+                        <div class = "img-more"><p>“LOL JK” - Putins izs...</p><a href="">Lasīt talāk</a></div>
+                        </div>
+                        <div class="img">
+                        <img src="https://e46m3.bimmerpost.com/forums/attachment.php?attachmentid=2271188&stc=1&d=1585532201" alt="">
+                        <div class = "img-more"><p>“LOL JK” - Putins izs...</p><a href="">Lasīt talāk</a></div>
+                        </div>
+                        <div class="img">
+                        <img src="https://e46m3.bimmerpost.com/forums/attachment.php?attachmentid=2271188&stc=1&d=1585532201" alt="">
+                        <div class = "img-more"><p>“LOL JK” - Putins izs...</p><a href="">Lasīt talāk</a></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
