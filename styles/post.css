@@ -48,6 +48,37 @@ p {
 .post-like-button i {
     font-size: 1.25rem;
 }
+
+/* KOMENTĀRI */
+
+.comments-container {
+    background-color: antiquewhite;
+    width: 100%;
+
+    margin: 1rem 0rem;
+}
+
+.section-title {
+    font-size: 2.25rem;
+    font-weight: bold;
+}
+
+.comment-head {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    gap: 0.5rem;
+}
+
+.comment-author {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+.comment-date {
+    font-weight: 300;
+    font-size: 0.9rem;
+}
 /* labā daļa */
 
 .suggestions-container {
