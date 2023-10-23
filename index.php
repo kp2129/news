@@ -1,5 +1,5 @@
 <?php
-
+include_once('components/navbar.php')
 
 ?>
 
@@ -9,57 +9,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Ziņas</title>
+    <link rel="stylesheet" href="styles/navbar.css">
+    <link rel="stylesheet" href="styles/index.css">
+    <title>Document</title>
 </head>
 
 <body>
-    <header>
-        <div>LOGO</div>
-        <div>Pieslēgties</div>
-    </header>
-    <div class="zinas-center">
-        <aside>
-            <button>x</button>
-            <label>Topic</label>
-            <select>
-                <option>Cars</option>
-            </select>
-            <label>Kārtot</label>
-            <select>
-                <option>Jaunākās</option>
-            </select>
+    <!-- saņem no DB visus ierakstus. pirmie 2 ir lielie, pārējie ir mazie varianti -->
+    <!-- skatīt pēc figma stila -->
+    <div class="container">
+        <!-- lielais variants (pirmajiem 2 ierakstiem)-->
+        <div class="top-container">
+            <a href="post.php?id=0" class="l-post-container">
+                <img class="l-post-image" src="https://ichef.bbci.co.uk/news/976/cpsprodpb/EF66/production/_98268216_gettyimages-826469180-1.jpg.webp" alt="">
+                <p class="l-post-title">LOL JK, Putins izsaka. Mediji pārsteigti par viņu angļu valodas un interneta kultūras izpratni</p>
+                <div class="l-post-like-count button-style">
+                    <p>12K</p>
+                    <i class="bi bi-hand-thumbs-up-fill"></i>
+                </div>
+            </a>
 
-        </aside>
-        <main>
-            <div class="top-news">
-                <p>TOP</p>
-                <img src="https://www.e90post.com/forums/attachment.php?attachmentid=17216&stc=1&d=1141159310" />
-                <p>Glorious 320d titanium silver 2006</p>
-            </div>
-            <div class="side-news">
-                <div class="top-side-news">
-                    <img id="side-news-img" src="https://www.e90post.com/forums/attachment.php?attachmentid=17216&stc=1&d=1141159310" />
-                    <p>Be awere of fake glouries 320d</p>
+            <a href="post.php?id=0" class="l-post-container">
+                <img class="l-post-image" src="https://ichef.bbci.co.uk/news/976/cpsprodpb/EF66/production/_98268216_gettyimages-826469180-1.jpg.webp" alt="">
+                <div class="l-post-like-count button-style">
+                    <p>139K</p>
+                    <i class="bi bi-hand-thumbs-up-fill"></i>
                 </div>
-                <div>
-                    <div class="side-news-other">
-                        <img src="https://www.e90post.com/forums/attachment.php?attachmentid=17216&stc=1&d=1141159310" />
-                        <p>Cars that look like a BMW 320d e91 </p>
-                    </div>
+                <p class="l-post-title">LOL JK, Putins izsaka. Mediji pārsteigti par viņu angļu valodas un interneta kultūras izpratni</p>
+            </a>
+        </div>
+        <!-- mazais variants (pārējiem) -->
+        <div class="bottom-container">
+            <a href="#" class="m-post-container">
+                <img class="m-post-image" src="https://ichef.bbci.co.uk/news/976/cpsprodpb/EF66/production/_98268216_gettyimages-826469180-1.jpg.webp" alt="">
+                <p class="m-post-title">LOL JK, Putins izsaka. Mediji pārsteigti par viņu angļu valodas un interneta kultūras izpratni</p>
+            </a>
 
-                </div>
-                <div>
-                    <div class="side-news-other">
-                        <img src="https://www.motortrend.com/uploads/sites/10/2015/11/2006-audi-a4-2.0-t-with-multitronic-sedan-angular-front.png?fit=around%7C875:492.1875" />
-                        <p>Cars that don’t look like a BMW 320d e91 </p>
-                    </div>
-                </div>
-            </div>
-        </main>
+            <a href="#" class="m-post-container">
+                <img class="m-post-image" src="https://ichef.bbci.co.uk/news/976/cpsprodpb/EF66/production/_98268216_gettyimages-826469180-1.jpg.webp" alt="">
+                <p class="m-post-title">LOL JK, Putins izsaka. Mediji pārsteigti par viņu angļu valodas un interneta kultūras izpratni</p>
+            </a>
+
+            <a href="#" class="m-post-container">
+                <img class="m-post-image" src="https://ichef.bbci.co.uk/news/976/cpsprodpb/EF66/production/_98268216_gettyimages-826469180-1.jpg.webp" alt="">
+                <p class="m-post-title">LOL JK, Putins izsaka. Mediji pārsteigti par viņu angļu valodas un interneta kultūras izpratni</p>
+            </a>
+
+            <a href="#" class="m-post-container">
+                <img class="m-post-image" src="https://ichef.bbci.co.uk/news/976/cpsprodpb/EF66/production/_98268216_gettyimages-826469180-1.jpg.webp" alt="">
+                <p class="m-post-title">LOL JK, Putins izsaka. Mediji pārsteigti par viņu angļu valodas un interneta kultūras izpratni</p>
+            </a>
+            <a href="#" class="m-post-container">
+                <img class="m-post-image" src="https://ichef.bbci.co.uk/news/976/cpsprodpb/EF66/production/_98268216_gettyimages-826469180-1.jpg.webp" alt="">
+                <p class="m-post-title">LOL JK, Putins izsaka. Mediji pārsteigti par viņu angļu valodas un interneta kultūras izpratni</p>
+            </a>
+            <a href="#" class="m-post-container">
+                <img class="m-post-image" src="https://ichef.bbci.co.uk/news/976/cpsprodpb/EF66/production/_98268216_gettyimages-826469180-1.jpg.webp" alt="">
+                <p class="m-post-title">LOL JK, Putins izsaka. Mediji pārsteigti par viņu angļu valodas un interneta kultūras izpratni</p>
+            </a>
+
+        </div>
     </div>
-
-    <footer></footer>
 </body>
 
 </html>

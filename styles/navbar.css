@@ -1,0 +1,86 @@
+/* colors */
+:root {
+    --bg: #fff;
+    --bg-other: #d9d9d9;
+    --text: #000;
+    --logo-color: #000;
+}
+
+/* reusable */
+.button-style {
+    background-color: var(--bg-other);
+    padding: 0.25rem 0.5rem;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.s-button-style {
+    background-color: var(--bg-other);
+    border-radius: 15px;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+}
+
+/* setup */
+
+* {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+        sans-serif;
+}
+
+.nav-container {
+    margin: 1.5rem 5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* left side */
+
+.left-side {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.nav-logo {
+    font-size: 2.25rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: var(--logo-color);
+    margin-right: 4rem;
+}
+
+button {
+    border: none;
+    background-color: transparent;
+}
+
+.topic-container {
+    display: flex;
+    gap: 1.5rem;
+}
+.topic-button {
+    font-weight: 500;
+}
+
+/* right side */
+
+.right-side {
+    display: flex;
+    flex-direction: row;
+    gap: 0.75rem;
+}
+
+.login-button {
+}
+
+.filter-button {
+}
+
+.search-button {
+}
