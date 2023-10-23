@@ -1,35 +1,46 @@
+<?php
+include_once('components/navbar.php')
+
+// skatās pēc $_GET['id'], saskaņot ar DB
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/navbar.css">
+    <link rel="stylesheet" href="styles/register.css">
     <title>Register</title>
-    <link rel="stylesheet" href="styles/style.css">
-
 </head>
 
+
 <body>
-    <header></header>
-    <div class="container">
-        <h1>Register</h1>
-        <form action="process_file.php" method="post">
-            <div class="form-group">
-                <input type="text" id="username" name="username" placeholder="Email adress" required>
+    <div class="cont">
+        <div class="border">
+            <div class="title">
+                <h1>Reģistrēties</h1>
             </div>
-            <div class="form-group">
-                <input type="password" id="password" name="password" placeholder="Password" required>
+            <div class="input">
+                <div class="user">
+                    <p>Lietotājvārds</p>
+                </div>
+                <input type="text">
+                <div class="pass">
+                    <p>E-pasts</p>
+                </div>
+                <input type="text">
+                <div class="pass">
+                    <p>Parole</p>
+                </div>
+                <input type="text">
             </div>
-            <div class="form-group">
-                <input type="password" id="password" name="password" placeholder="Confirm Password" required>
+            <div class="submit">
+                <button>Reģistrēties</button>
             </div>
-            <input type="submit" value="Register account">
-            <div class="form-group">
-            </div>
-        </form>
+        </div>
     </div>
-
-
 </body>
 
 </html>
