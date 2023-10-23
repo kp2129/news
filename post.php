@@ -42,6 +42,35 @@ include_once('components/navbar.php')
                     $CONTENT
                 </p>
             </div>
+
+            <!-- KOMENTĀRI -->
+            <div class="comments-container">
+                <p class="section-title">
+                    Komentāri
+                </p>
+                <!-- forma -->
+                <div class="comment-submit-container">
+                    <textarea name="" id="" cols="30" rows="10" class="comment-input">Ievadi komentāru!</textarea>
+                    <button class="comment-submit-button button-style">Publicēt</button>
+                </div>
+                <!-- komentāri  -->
+                <!-- LAI RĀDĪTU KOMENTĀRUS, KOPĒT comment-entry-container un ievadīt katra komentāra datus -->
+                <div class="comment-entry-container">
+                    <div class="comment-head">
+                        <p class="comment-author">$AUTHOR</p>
+                        <p class="comment-date">$DATE</p>
+                    </div>
+                    <p class="comment-content">$CONTENT</p>
+                </div>
+                <div class="comment-entry-container">
+                    <div class="comment-head">
+                        <p class="comment-author">Author</p>
+                        <p class="comment-date">2023-10-23</p>
+                    </div>
+                    <p class="comment-content">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur at aliquam, minima, quod incidunt quas vel pariatur ad dignissimos distinctio iure, iste odit! Optio laudantium quod, ad quisquam iusto commodi.</p>
+                </div>
+            </div>
+
         </div>
 
         <!-- labā daļa (Priekš jums sadaļa) -->
