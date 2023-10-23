@@ -95,8 +95,8 @@ footer {
     background: #d1cdcd;
     border-radius: 25px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin: 60px;
-
+    margin: 80px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
 }
 
 h1 {
