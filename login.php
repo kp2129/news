@@ -18,10 +18,9 @@ include_once('components/navbar.php')
 </head>
 <body>
 
-<header></header>
     <div class="container">
         <h1>Login</h1>
-        <form action="process_file.php" method="post">
+        <form>
             <div class="form-group">
                 <label>Lietotājvārds</label>
                 <input type="text" id="username" name="username" placeholder="Email adress" required>
@@ -30,9 +29,9 @@ include_once('components/navbar.php')
             <label>Parole</label>
                 <input type="password" id="password" name="password" placeholder="Password" required>
             </div>
-            <input type="submit" value="Pieslēgties">
+            <input clas="login-button" type="submit" value="Pieslēgties">
             <div class="form-group">
-                <p>Don't have an account? <a href="#">Sign Up here!</a></p>
+                <p>Don't have an account? <a href="register.php">Sign Up here!</a></p>
             </div>
         </form>
     </div>

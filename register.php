@@ -25,6 +25,7 @@
             </div>
             <input type="submit" value="Register account">
             <div class="form-group">
+                <p>Have an account? <a href="login.php">Log In here!</a></p>
             </div>
         </form>
     </div>
