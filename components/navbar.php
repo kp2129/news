@@ -23,38 +23,14 @@
         </div>
     </div>
     <div class="right-side">
-        <button class="dark-button s-button-style">
-            <i class="bi bi-sun"></i>
-        </button>
         <button class="login-button button-style">
             Pieslēgties
         </button>
-        <button class="topic-button">
-            Sports
+        <button class="filter-button s-button-style">
+            <i class="bi bi-filter"></i>
         </button>
-        <button class="topic-button">
-            Mūzika
-        </button>
-        <button class="topic-button">
-            Dārzs
-        </button>
-        <button class="topic-button">
-            Izklaide
-        </button>
-        <button class="topic-button">
-            Politika
+        <button class="search-button s-button-style">
+            <i class="bi bi-search"></i>
         </button>
     </div>
-</div>
-<div class="right-side">
-    <button class="login-button button-style">
-        Pieslēgties
-    </button>
-    <button class="filter-button s-button-style">
-        <i class="bi bi-filter"></i>
-    </button>
-    <button class="search-button s-button-style">
-        <i class="bi bi-search"></i>
-    </button>
-</div>
 </div>
