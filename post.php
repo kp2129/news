@@ -1,7 +1,11 @@
 <?php
-include_once('components/navbar.php')
+include_once('components/navbar.php');
+include('libraries/db.php');
+$db = new Database;
 
 // skatās pēc $_GET['id'], saskaņot ar DB
+$id = $_GET['id'];
+$data = singleView($id);
 
 ?>
 <!DOCTYPE html>

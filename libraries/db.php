@@ -8,7 +8,7 @@ class Database
 
     public function __construct()
     {
-        $this->conn = new mysqli("https://phpmyadmin.kp2129.com", "zinas", "zinasforall2023", "news");
+        $this->conn = new mysqli("localhost", "root", "", "news");
     }
 
     private function query_($query)
@@ -137,6 +137,13 @@ class Database
             }
         }
         echo json_encode($obj);
+    }
+    public function singleView($id){
+        $data = select("SELECT * FROM `news_articles` WHERE `id` = $id");
+        $single = [
+            'data' => $data
+        ];
+        return $single;
     }
 
 }
