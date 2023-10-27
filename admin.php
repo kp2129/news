@@ -47,6 +47,7 @@ include_once('components/navbar.php')
         </div>
         <!-- REDIĢĒT IERAKSTU -->
         <!-- rediģē selected ierakstu. JA NAV SELECTED, tad display:none top un bottom edit-containeriem -->
+        <!-- ja ir JAUNS, tad rediģēt pogu pārdēvēt uz "izveidot" un dzēst pogu noņemt -->
         <div class="right-container">
             <p class="side-title">Rediģēt ierakstu</p>
             <div class="edit-container">
@@ -78,6 +79,7 @@ include_once('components/navbar.php')
                 <div class="edit-bottom-container">
                     <button class="edit-button button-style">Dzēst</button>
                     <button class="edit-button button-style">Rediģēt</button>
+                    <button class="edit-button button-style">Jauns</button>
                 </div>
                 </form>
             </div>
