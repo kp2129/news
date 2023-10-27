@@ -21,23 +21,65 @@ include_once('components/navbar.php')
 <body>
     <div class="container">
         <!-- JAUNÁKIE IERAKSTI  -->
+        <!-- jaunākie raksti - visi raksti ievietoti savā "post" divā -->
+
         <div class="left-container">
+            <p class="side-title">Jaunākie ieraksti</p>
             <div class="post-container">
                 <div class="post">
-                    <div class="button-overlay">
-                        <button class="button-style">views</button>
-                        <button class="button-style">edit</button>
+                    <div class="post-image">
+                        <button class="admin-button button-style">x (like icon)</button>
+                        <button class="admin-button button-style">edit</button>
                     </div>
-                    <img src="https://ichef.bbci.co.uk/news/976/cpsprodpb/EF66/production/_98268216_gettyimages-826469180-1.jpg.webp" alt="">
+                    <p class="post-title">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, quae.</p>
+
+                </div>
+
+                <div class="post">
+                    <div class="post-image">
+                        <button class="admin-button button-style">x (like icon)</button>
+                        <button class="admin-button button-style">edit</button>
+                    </div>
                     <p class="post-title">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, quae.</p>
 
                 </div>
             </div>
         </div>
         <!-- REDIĢĒT IERAKSTU -->
+        <!-- rediģē selected ierakstu. JA NAV SELECTED, tad display:none top un bottom edit-containeriem -->
         <div class="right-container">
+            <p class="side-title">Rediģēt ierakstu</p>
             <div class="edit-container">
-                a
+                <div class="edit-top-container">
+                    <form action="" class="edit-form">
+                        <div class="input-container">
+                            <p>Virsraksts</p>
+                            <input type="text">
+                        </div>
+                        <div class="input-container">
+                            <p>Bildes lokācija</p>
+                            <input type="text">
+                        </div>
+                        <div class="input-container">
+                            <p>Autors</p>
+                            <input type="text">
+                        </div>
+                        <div class="input-container">
+                            <p>Kategorija</p>
+                            <select name="kategorija">
+                                <option value="0">Example</option>
+                            </select>
+                        </div>
+                        <div class="input-container">
+                            <p>Saturs</p>
+                            <textarea class='input-textarea' name="" id="" cols="30" rows="13"></textarea>
+                        </div>
+                </div>
+                <div class="edit-bottom-container">
+                    <button class="edit-button button-style">Dzēst</button>
+                    <button class="edit-button button-style">Rediģēt</button>
+                </div>
+                </form>
             </div>
         </div>
     </div>
