@@ -30,7 +30,7 @@ include_once('components/navbar.php')
             <div class="post-container">
                 <div class="post">
                     <div class="post-image">
-                        <button class="admin-button button-style">x (like icon)</button>
+                        <button class="admin-button button-style">x <img src="svg/hand-thumbs-up-fill.svg" alt=""></button>
                         <button class="admin-button button-style">edit</button>
                     </div>
                     <p class="post-title">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, quae.</p>
@@ -39,7 +39,8 @@ include_once('components/navbar.php')
 
                 <div class="post">
                     <div class="post-image">
-                        <button class="admin-button button-style">x (like icon)</button>
+                        <button class="admin-button button-style">x <img src="svg/hand-thumbs-up-fill.svg" alt=""></button>
+
                         <button class="admin-button button-style">edit</button>
                     </div>
                     <p class="post-title">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, quae.</p>
