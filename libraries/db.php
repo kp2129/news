@@ -8,7 +8,7 @@ class Database
 
     public function __construct()
     {
-        $this->conn = new mysqli("sql211.epizy.com", "epiz_34105016", "LBh5oLx6k8fQloV", "epiz_34105016_database");
+        $this->conn = new mysqli("https://phpmyadmin.kp2129.com", "zinas", "zinasforall2023", "news");
     }
 
     private function query_($query)
