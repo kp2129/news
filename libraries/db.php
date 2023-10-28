@@ -8,8 +8,18 @@ class Database
 
     public function __construct()
     {
-        $this->conn = new mysqli("https://phpmyadmin.kp2129.com", "zinas", "zinasforall2023", "news");
+        $dbHost = "127.0.0.1";  // Use the correct MySQL server's hostname
+        $dbUsername = "root";
+        $dbPassword = "";
+        $dbName = "database";
+
+        $this->conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
+
+        if ($this->conn->connect_error) {
+            die("Connection failed: " . $this->conn->connect_error);
+        }
     }
+
 
     private function query_($query)
     {
@@ -121,7 +131,7 @@ class Database
                 $stmt->close();
 
                 $emailExists = $this->select("SELECT * FROM users_blog WHERE email = '$email'");
-                if (empty($emailExists)) {        
+                if (empty($emailExists)) {
                 } else {
                     // Email already exists
                     $obj['success'] = false;
@@ -133,7 +143,4 @@ class Database
         }
         echo json_encode($obj);
     }
-
 }
-
-

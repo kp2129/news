@@ -1,5 +1,7 @@
 <?php
-include_once('components/navbar.php')
+include_once('components/navbar.php');
+include_once('libraries/db.php');
+$db = new Database;
 
 ?>
 
