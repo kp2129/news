@@ -8,8 +8,13 @@ class Database
 
     public function __construct()
     {
+
         $this->conn = new mysqli("localhost", "root", "", "news");
-    }
+         if ($this->conn->connect_error) {
+            die("Connection failed: " . $this->conn->connect_error);
+        }
+
+
 
     private function query_($query)
     {
@@ -41,11 +46,6 @@ class Database
     }
 
     public function update($query)
-    {
-        return $this->query_($query);
-    }
-
-    public function find($query)
     {
         return $this->query_($query);
     }
@@ -126,7 +126,7 @@ class Database
                 $stmt->close();
 
                 $emailExists = $this->select("SELECT * FROM users_blog WHERE email = '$email'");
-                if (empty($emailExists)) {        
+                if (empty($emailExists)) {
                 } else {
                     // Email already exists
                     $obj['success'] = false;
@@ -138,14 +138,5 @@ class Database
         }
         echo json_encode($obj);
     }
-    public function singleView($id){
-        $data = select("SELECT * FROM `news_articles` WHERE `id` = $id");
-        $single = [
-            'data' => $data
-        ];
-        return $single;
-    }
 
 }
-
-

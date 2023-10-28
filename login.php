@@ -1,7 +1,9 @@
 <?php
 include_once('components/navbar.php')
 
+
 // skatās pēc $_GET['id'], saskaņot ar DB
+
 
 ?>
 <!DOCTYPE html>
@@ -10,12 +12,15 @@ include_once('components/navbar.php')
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="styles/navbar.css">
     <link rel="stylesheet" href="styles/login.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="scripts/scripts.js"></script>
+
     <title>Login</title>
 </head>
+
 
 
 <body>
@@ -36,6 +41,7 @@ include_once('components/navbar.php')
             </div>
             <div class="submit">
                 <button>Pieslēgties</button>
+
             </div>
         </div>
     </div>
