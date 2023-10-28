@@ -1,35 +1,49 @@
+<?php
+include_once('components/navbar.php')
+
+// skatās pēc $_GET['id'], saskaņot ar DB
+
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="scripts/scripts.js"></script>
     <title>Register</title>
-    <link rel="stylesheet"  href="style.css">
-
 </head>
-<body>
-    <header></header>
-    <div class="container">
-        <h1>Register</h1>
-        <form action="process_file.php" method="post">
-            <div class="form-group">
-                <input type="text" id="username" name="username" placeholder="Email adress" required>
-            </div>
-            <div class="form-group">
-                <input type="password" id="password" name="password" placeholder="Password" required>
-            </div>
-            <div class="form-group">
-                <input type="password" id="password" name="password" placeholder="Confirm Password" required>
-            </div>
-            <input type="submit" value="Register account">
-            <div class="form-group">
-                <p>Have an account? <a href="login.php">Log In here!</a></p>
-            </div>
-        </form>
-    </div>
 
-    
+
+<body>
+    <div class="cont">
+        <div class="border">
+            <div class="title">
+                <h1>Reģistrēties</h1>
+            </div>
+            <div class="input">
+                <div class="user">
+                    <p>Lietotājvārds</p>
+                </div>
+                <input type="text">
+                <div class="pass">
+                    <p>E-pasts</p>
+                </div>
+                <input type="text">
+                <div class="pass">
+                    <p>Parole</p>
+                </div>
+                <input type="text">
+            </div>
+
+            <div class="submit">
+                <button>Reģistrēties</button>
+
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>

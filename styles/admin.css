@@ -1,0 +1,130 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    margin: 0rem 5rem;
+    height: 80vh;
+}
+
+.side-title {
+    margin: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* IERAKSTI */
+.left-container {
+    flex-basis: 50%;
+    width: 100%;
+}
+
+.post-container {
+    overflow: scroll;
+    height: 100%;
+
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-auto-rows: min-content;
+    grid-auto-columns: min-content;
+    gap: 1rem;
+    row-gap: 1rem;
+}
+
+.post-image {
+    background-image: linear-gradient(
+            to bottom,
+            transparent,
+            rgba(0, 0, 0, 0.75)
+        ),
+        url("https://ichef.bbci.co.uk/news/976/cpsprodpb/EF66/production/_98268216_gettyimages-826469180-1.jpg.webp");
+    background-size: cover;
+    border-radius: 15px;
+    width: 100%;
+
+    height: 11rem;
+
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+}
+
+.admin-button {
+    margin: 0.5rem 0rem 0.5rem 0.5rem;
+}
+
+.post-title {
+    margin: 0;
+    color: var(--text);
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+/* EDIT */
+.right-container {
+    flex-basis: 50%;
+    width: 100%;
+}
+
+.edit-container {
+    background-color: var(--bg-other);
+    border-radius: 15px;
+    height: 100%;
+    padding: 0rem 2rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: end;
+}
+.edit-top-container {
+    width: 100%;
+    /* display: none; */
+}
+
+.edit-bottom-container {
+    /* display: none; */
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-container p {
+    margin: 0;
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+.input-container input {
+    height: 1.5rem;
+}
+.input-container input,
+.input-container .input-textarea,
+.input-container select {
+    background-color: var(--bg-other-darker);
+    border: none;
+    border-radius: 15px;
+    outline: none;
+    transition: 0.25s;
+}
+
+.input-container input:focus,
+.input-container .input-textarea:focus,
+.input-container select:focus {
+    background-color: var(--input-focus);
+}
+
+.input-textarea {
+    resize: none;
+}
+
+.edit-button {
+    background-color: var(--bg-other-darker);
+    font-weight: bold;
+    font-size: 1.1rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem 1rem;
+    margin-bottom: 1.5rem;
+}

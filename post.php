@@ -1,7 +1,11 @@
 <?php
-include_once('components/navbar.php')
+include_once('components/navbar.php');
+include('libraries/db.php');
+$db = new Database;
 
 // skatās pēc $_GET['id'], saskaņot ar DB
+$id = $_GET['id'];
+$data = singleView($id);
 
 ?>
 <!DOCTYPE html>
@@ -14,7 +18,10 @@ include_once('components/navbar.php')
     <script src="scripts/scripts.js"></script>
     <link rel="stylesheet" href="styles/navbar.css">
     <link rel="stylesheet" href="styles/post.css">
-    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="scripts/scripts.js"></script>
+    <!-- POST TITLE SAMAZINÁT LÍDZ APMÉRAM 7 CHARACTERIEM -->
+    <title>$TITLE</title>
 </head>
 
 <!-- content vietā var ielikt no DB php variables -->

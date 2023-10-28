@@ -8,17 +8,12 @@ class Database
 
     public function __construct()
     {
-        $dbHost = "127.0.0.1";  // Use the correct MySQL server's hostname
-        $dbUsername = "root";
-        $dbPassword = "";
-        $dbName = "database";
 
-        $this->conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
-
-        if ($this->conn->connect_error) {
+        $this->conn = new mysqli("localhost", "root", "", "news");
+         if ($this->conn->connect_error) {
             die("Connection failed: " . $this->conn->connect_error);
         }
-    }
+
 
 
     private function query_($query)
@@ -143,4 +138,5 @@ class Database
         }
         echo json_encode($obj);
     }
+
 }
