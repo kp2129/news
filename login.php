@@ -1,8 +1,16 @@
 <?php
-include_once('components/navbar.php')
+include_once('components/navbar.php');
+include_once('libraries/db.php');
 
 
-// skatās pēc $_GET['id'], saskaņot ar DB
+print_r($_POST);
+if(isset($_POST['username']) && isset($_POST['password'])){
+    $db = new Database;
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $result = $db->login($username, $password);
+    print_r($result);
+}
 
 
 ?>
@@ -24,7 +32,7 @@ include_once('components/navbar.php')
 
 
 <body>
-    <div class="cont">
+    <form  method="POST" class="cont">
         <div class="border">
             <div class="title">
                 <h1>Pieslēgties</h1>
@@ -33,18 +41,18 @@ include_once('components/navbar.php')
                 <div class="user">
                     <p>Lietotājvārds</p>
                 </div>
-                <input type="text">
+                <input type="text" name="username">
                 <div class="pass">
                     <p>Parole</p>
                 </div>
-                <input type="text">
+                <input type="text" name="password">
             </div>
             <div class="submit">
                 <button>Pieslēgties</button>
 
             </div>
         </div>
-    </div>
+</form>
 </body>
 
 </html>
