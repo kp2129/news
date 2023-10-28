@@ -5,8 +5,9 @@ $db = new Database;
 
 // skatās pēc $_GET['id'], saskaņot ar DB
 $id = $_GET['id'];
-$data = singleView($id);
+$data = $db->singleView($id);
 
+print_r($data);
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -14,11 +14,18 @@ class Database
             die("Connection failed: " . $this->conn->connect_error);
         }
 
-
+    }
 
     private function query_($query)
     {
         return $this->conn->query($query);
+    }
+
+    public function singleView($id)
+    {
+        $data = $this->select("SELECT * FROM `news_articles` WHERE `article_id` = $id");
+       
+        return $data;
     }
 
     public function insert($query)
@@ -75,13 +82,15 @@ class Database
 
 
 
-        $stmt = $this->conn->prepare("SELECT * FROM users_blog WHERE username = ?");
+        $stmt = $this->conn->prepare("SELECT * FROM users WHERE username = ?");
         $stmt->bind_param('s', $username);
         $stmt->execute();
         $result = $stmt->get_result();
 
         if ($result->num_rows == 0) {
             $obj['errUser'] = 'Nav atrasts profils!';
+            echo json_encode($obj);
+            return;
         }
 
         $user = $result->fetch_assoc();
@@ -139,4 +148,5 @@ class Database
         echo json_encode($obj);
     }
 
+ 
 }
