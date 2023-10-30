@@ -139,11 +139,61 @@ class Database
         echo json_encode($obj);
     }
     public function singleView($id){
-        $data = select("SELECT * FROM `news_articles` WHERE `id` = $id");
+        $obj = new Database();
+
+        $data = $obj->select("SELECT
+        a.article_id,
+        a.title,
+        a.content,
+        a.published_date,
+        a.source,
+        a.views,
+        c.category_name AS category,
+        u.username AS author,
+        (
+            SELECT JSON_ARRAYAGG(
+                JSON_OBJECT('comment', co.content, 'comment_date', co.comment_date, 'user_id', co.user_id)
+            )
+            FROM comments AS co
+            WHERE co.article_id = a.article_id
+        ) AS comments,
+        (
+            SELECT JSON_ARRAYAGG(i.image_url)
+            FROM article_images AS i
+            WHERE i.article_id = a.article_id
+        ) AS images,
+        (
+            SELECT COUNT(*)
+            FROM article_likes AS al
+            WHERE al.article_id = a.article_id
+        ) AS like_count
+    FROM news_articles AS a
+    LEFT JOIN categories AS c ON a.category_id = c.category_id
+    LEFT JOIN users AS u ON a.author_id = u.user_id WHERE a.article_id = $id;");
+
         $single = [
             'data' => $data
         ];
-        return $single;
+        return($single);
+    }
+    public function comments($id){
+        $obj = new Database();
+
+        $data = $obj->select("SELECT 
+        c.comment_id,
+        c.article_id,
+        u.username AS user_name,
+        c.content,
+        c.comment_date
+        FROM comments c
+        JOIN users u ON c.user_id = u.user_id
+        WHERE c.article_id = 1;");
+
+        $comment = [
+            'data' => $data
+        ];
+
+        return($comment);
     }
 
 }

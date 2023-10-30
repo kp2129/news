@@ -22,7 +22,7 @@ include_once('components/navbar.php')
     <div class="container">
         <!-- lielais variants (pirmajiem 2 ierakstiem)-->
         <div class="top-container">
-            <a href="post.php?id=0" class="l-post-container">
+            <a href="post.php?id=1" class="l-post-container">
                 <img class="l-post-image" src="https://ichef.bbci.co.uk/news/976/cpsprodpb/EF66/production/_98268216_gettyimages-826469180-1.jpg.webp" alt="">
                 <p class="l-post-title">LOL JK, Putins izsaka. Mediji pārsteigti par viņu angļu valodas un interneta kultūras izpratni</p>
                 <div class="l-post-like-count button-style">
