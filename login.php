@@ -2,6 +2,15 @@
 include_once('components/navbar.php');
 include_once('libraries/db.php');
 
+if (isset($_SESSION)) {
+    if (isset($_SESSION['UId'])) {
+        header("Location: index.php");
+        exit; // Important: After a redirect, exit the script to prevent further execution
+
+    }
+}
+
+print_r($_SESSION)
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +32,10 @@ include_once('libraries/db.php');
 <body>
     <form method="POST" class="cont login">
         <div class="border">
-            <div class="login-title">Pieslēgties</div>
+            <div class="login-title">
+                Pieslēgties
+            </div>
+            <p class="err">MAn</p>
             <div class="input">
                 <p>Lietotājvārds</p>
                 <input type="text" name="username">
