@@ -1,7 +1,10 @@
 <?php
-include_once('components/navbar.php')
+include_once('components/navbar.php');
+include_once('libraries/library.php');
 
+print_r(AdminPage());
 // IZVEIDOT CHECK VAI IR ADMINS VAI NAV LIETOJOT role_id no user tabulas
+
 
 ?>
 

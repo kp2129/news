@@ -73,12 +73,16 @@ class Database
 
     public function GetAllPosts()
     {
-        return $this->select("SELECT * from news_articles");
+        $posts = $this->select("SELECT * from news_articles");
+        $images = $this->select("SELECT image_url from article_images");
+        return array("posts" => $posts, "images" => $images)
     }
 
     public function GetPostByID($id)
     {
-        return $this->select("SELECT * from news_articles WHERE article_id=$id");
+        $posts = $this->select("SELECT * from news_articles WHERE article_id = $id");
+        $images = $this->select("SELECT image_url from article_images WHERE article_id = $id");
+        return array("posts" => $posts, "images" => $images)
     }
 
     public function login($username, $password)

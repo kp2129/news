@@ -34,7 +34,7 @@ function AdminPage()
     $db = Sync();
     $allPosts = $db->GetAllPosts();
 
-    $result = '';
-
-    return $result;
+    foreach ($allPosts as $post => $content) {
+        echo ($post);
+    }
 }
