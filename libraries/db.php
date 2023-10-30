@@ -82,8 +82,7 @@ class Database
         return $likes;
     }
 
-    public function singleView($id)
-    {
+    public function single($id){
         $obj = new Database();
 
         $data = $obj->select("SELECT
@@ -112,17 +111,16 @@ class Database
             FROM article_likes AS al
             WHERE al.article_id = a.article_id
         ) AS like_count
-    FROM news_articles AS a
-    LEFT JOIN categories AS c ON a.category_id = c.category_id
-    LEFT JOIN users AS u ON a.author_id = u.user_id WHERE a.article_id = $id;");
+        FROM news_articles AS a
+        LEFT JOIN categories AS c ON a.category_id = c.category_id
+        LEFT JOIN users AS u ON a.author_id = u.user_id WHERE a.article_id = $id;")
 
         $single = [
             'data' => $data
         ];
-        return ($single);
+        return($single);
     }
-    public function comments($id)
-    {
+    public function comments($id){
         $obj = new Database();
 
         $data = $obj->select("SELECT 
@@ -133,7 +131,7 @@ class Database
         c.comment_date
         FROM comments c
         JOIN users u ON c.user_id = u.user_id
-        WHERE c.article_id = 1;");
+        WHERE c.article_id = $id;");
 
         $comment = [
             'data' => $data
@@ -141,10 +139,12 @@ class Database
 
         return ($comment);
     }
+
     public function GetPostByID($id)
     {
         $posts = $this->select("SELECT * from news_articles WHERE article_id = $id");
         $images = $this->select("SELECT image_url from article_images WHERE article_id = $id");
         return array("posts" => $posts, "images" => $images);
     }
+
 }

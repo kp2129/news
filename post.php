@@ -6,7 +6,7 @@ $database = new Database();
 
 $id = $_GET['id'];
 
-$data = $database->singleView($id);
+$data = $database->single($id);
 $single = $data['data'];
 
 $data1 = $database->comments($id);
@@ -17,9 +17,9 @@ $comment = $data1['data'];
 // echo '</pre>';
 // print_r($single[0][8]);
 $img = json_decode($single[0][9]);
-$data = $db->singleView($id);
 
-print_r($data);
+$data1 = $database->suggestion($single[0][6]);
+$count = count($data1);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -95,20 +95,13 @@ print_r($data);
             <p class="suggestions-title">
                 Priekš Jums
             </p>
-            <a href="#" class="m-post-container">
-                <img class="m-post-image" src="https://ichef.bbci.co.uk/news/976/cpsprodpb/EF66/production/_98268216_gettyimages-826469180-1.jpg.webp" alt="">
-                <p class="m-post-title">LOL JK, Putins izsaka. Mediji pārstei...</p>
+            <?php foreach($data1 as $sugg){
+                if($sugg[0] != $single[0][0]){?>
+            <a href="?id=<?=$sugg[0]?>" class="m-post-container">
+                <img class="m-post-image" src="<?=$sugg[8]?>" alt="">
+                <p class="m-post-title"><?=$sugg[1]?></p>
             </a>
-
-            <a href="#" class="m-post-container">
-                <img class="m-post-image" src="https://ichef.bbci.co.uk/news/976/cpsprodpb/EF66/production/_98268216_gettyimages-826469180-1.jpg.webp" alt="">
-                <p class="m-post-title">LOL JK, Putins izsaka. Mediji pārstei...</p>
-            </a>
-
-            <a href="#" class="m-post-container">
-                <img class="m-post-image" src="https://ichef.bbci.co.uk/news/976/cpsprodpb/EF66/production/_98268216_gettyimages-826469180-1.jpg.webp" alt="">
-                <p class="m-post-title">LOL JK, Putins izsaka. Mediji pārstei...</p>
-            </a>
+            <?php }} ?>
         </div>
     </div>
 </body>
