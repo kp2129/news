@@ -10,10 +10,9 @@ class Database
     {
 
         $this->conn = new mysqli("localhost", "root", "", "news");
-         if ($this->conn->connect_error) {
+        if ($this->conn->connect_error) {
             die("Connection failed: " . $this->conn->connect_error);
         }
-
     }
 
     private function query_($query)
@@ -24,7 +23,7 @@ class Database
     public function singleView($id)
     {
         $data = $this->select("SELECT * FROM `news_articles` WHERE `article_id` = $id");
-       
+
         return $data;
     }
 
@@ -62,6 +61,7 @@ class Database
         return $this->conn->prepare($query);
     }
 
+    // atgriež pēdējo ievietoto ID
     public function insertRetId($sql)
     {
         if ($this->conn->query($sql) === true) {
@@ -69,6 +69,16 @@ class Database
         } else {
             return false;
         }
+    }
+
+    public function GetAllPosts()
+    {
+        return $this->select("SELECT * from news_articles");
+    }
+
+    public function GetPostByID($id)
+    {
+        return $this->select("SELECT * from news_articles WHERE article_id=$id");
     }
 
     public function login($username, $password)
@@ -147,6 +157,4 @@ class Database
         }
         echo json_encode($obj);
     }
-
- 
 }
