@@ -20,13 +20,6 @@ class Database
         return $this->conn->query($query);
     }
 
-    public function singleView($id)
-    {
-        $data = $this->select("SELECT * FROM `news_articles` WHERE `article_id` = $id");
-
-        return $data;
-    }
-
     public function insert($query)
     {
         return $this->query_($query);
@@ -120,15 +113,13 @@ class Database
         ) AS like_count
         FROM news_articles AS a
         LEFT JOIN categories AS c ON a.category_id = c.category_id
-        LEFT JOIN users AS u ON a.author_id = u.user_id WHERE a.article_id = $id;");
+        LEFT JOIN users AS u ON a.author_id = u.user_id WHERE a.article_id = $id;")
 
         $single = [
             'data' => $data
         ];
-
         return($single);
     }
-
     public function comments($id){
         $obj = new Database();
 
@@ -146,7 +137,7 @@ class Database
             'data' => $data
         ];
 
-        return($comment);
+        return ($comment);
     }
 
     public function GetPostByID($id)
@@ -154,28 +145,6 @@ class Database
         $posts = $this->select("SELECT * from news_articles WHERE article_id = $id");
         $images = $this->select("SELECT image_url from article_images WHERE article_id = $id");
         return array("posts" => $posts, "images" => $images);
-
-    }
-    public function suggestion($categ){
-        $obj = new Database();
-        $data = $obj->select("SELECT
-        na.article_id,
-        na.title,
-        na.content,
-        na.author_id,
-        na.published_date,
-        na.source,
-        na.views,
-        c.category_name,
-        ai.image_url
-        FROM news_articles na
-        JOIN categories c ON na.category_id = c.category_id
-        LEFT JOIN article_images ai ON na.article_id = ai.article_id
-        WHERE c.category_name = '$categ';
-        ");
-        return($data);
     }
 
 }
-
-

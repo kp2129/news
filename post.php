@@ -51,17 +51,17 @@ $count = count($data1);
             <button class="post-like-button button-style">
                 <i class="bi bi-hand-thumbs-up"></i>
             </button>
-            <img class="post-image" src="<?=$img[0]?>" alt="">
-            <p class="post-title"><?=$single[0][1]?></p>
+            <img class="post-image" src="<?= $img[0] ?>" alt="">
+            <p class="post-title"><?= $single[0][1] ?></p>
 
             <div class="post-details-container">
-                <p class="post-details"><?=$single[0][7]?> • <?=$single[0][3]?> • <?=$single[0][10]?></p>
+                <p class="post-details"><?= $single[0][7] ?> • <?= $single[0][3] ?> • <?= $single[0][10] ?></p>
                 <i class="bi bi-hand-thumbs-up-fill"></i>
             </div>
 
             <div class="post-content-container">
                 <p class="post-content">
-                    <?=$single[0][2]?>
+                    <?= $single[0][2] ?>
                 </p>
             </div>
 
@@ -77,14 +77,14 @@ $count = count($data1);
                 </div>
                 <!-- komentāri  -->
                 <!-- LAI RĀDĪTU KOMENTĀRUS, KOPĒT comment-entry-container un ievadīt katra komentāra datus -->
-                <?php foreach($comment as $dati){ ?>
-                <div class="comment-entry-container">
-                    <div class="comment-head">
-                        <p class="comment-author"><?=$dati[2]?></p>
-                        <p class="comment-date"><?=$dati[4]?></p>
+                <?php foreach ($comment as $dati) { ?>
+                    <div class="comment-entry-container">
+                        <div class="comment-head">
+                            <p class="comment-author"><?= $dati[2] ?></p>
+                            <p class="comment-date"><?= $dati[4] ?></p>
+                        </div>
+                        <p class="comment-content"><?= $dati[3] ?></p>
                     </div>
-                    <p class="comment-content"><?=$dati[3]?></p>
-                </div>
                 <?php } ?>
             </div>
 

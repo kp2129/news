@@ -2,17 +2,6 @@
 include_once('components/navbar.php');
 include_once('libraries/db.php');
 
-
-print_r($_POST);
-if (isset($_POST['username']) && isset($_POST['password'])) {
-    $db = new Database;
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $result = $db->login($username, $password);
-    print_r($result);
-}
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,28 +21,21 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
 
 <body>
-<form method="POST" class="cont login">
+    <form method="POST" class="cont login">
         <div class="border">
-            <div class="title">
-                <h1>Pieslēgties</h1>
-            </div>
-            <input type="hidden" name="action" value="login">
-
+            <div class="login-title">Pieslēgties</div>
             <div class="input">
-                <div class="user">
-                    <p>Lietotājvārds</p>
-                </div>
+                <p>Lietotājvārds</p>
                 <input type="text" name="username">
-                <span class="error errUser"></span> 
-                <div class="pass">
-                    <p>Parole</p>
-                </div>
-                <input type="password" name="password">
-                <span class="error errPass"></span> 
+            </div>
+            <div class="input">
+                <p>Parole</p>
+                <input type="text" name="password">
             </div>
             <div class="submit">
-                <button type="submit">Pieslēgties</button>
+                <button>Pieslēgties</button>
             </div>
+            <a href="register.php" class="switch-login">neesi lietotājs?</a>
         </div>
     </form>
 </body>
