@@ -17,6 +17,10 @@ $comment = $data1['data'];
 // echo '</pre>';
 // print_r($single[0][8]);
 $img = json_decode($single[0][9]);
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 4eaad7e6419267780d748ea550f9e0ff946ea5c5
 $data = $db->singleView($id);
 
 print_r($data);

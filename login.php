@@ -4,7 +4,7 @@ include_once('libraries/db.php');
 
 
 print_r($_POST);
-if(isset($_POST['username']) && isset($_POST['password'])){
+if (isset($_POST['username']) && isset($_POST['password'])) {
     $db = new Database;
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -32,27 +32,30 @@ if(isset($_POST['username']) && isset($_POST['password'])){
 
 
 <body>
-    <form  method="POST" class="cont">
+<form method="POST" class="cont login">
         <div class="border">
             <div class="title">
                 <h1>Pieslēgties</h1>
             </div>
+            <input type="hidden" name="action" value="login">
+
             <div class="input">
                 <div class="user">
                     <p>Lietotājvārds</p>
                 </div>
                 <input type="text" name="username">
+                <span class="error errUser"></span> 
                 <div class="pass">
                     <p>Parole</p>
                 </div>
-                <input type="text" name="password">
+                <input type="password" name="password">
+                <span class="error errPass"></span> 
             </div>
             <div class="submit">
-                <button>Pieslēgties</button>
-
+                <button type="submit">Pieslēgties</button>
             </div>
         </div>
-</form>
+    </form>
 </body>
 
 </html>

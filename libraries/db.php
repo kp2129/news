@@ -88,95 +88,33 @@ class Database
         );
         return $likes;
     }
+
+    
+    public function comments($id){
+        $obj = new Database();
+
+        $data = $obj->select("SELECT 
+        c.comment_id,
+        c.article_id,
+        u.username AS user_name,
+        c.content,
+        c.comment_date
+        FROM comments c
+        JOIN users u ON c.user_id = u.user_id
+        WHERE c.article_id = 1;");
+
+        $comment = [
+            'data' => $data
+        ];
+
+        return($comment);
+    }
     public function GetPostByID($id)
     {
         $posts = $this->select("SELECT * from news_articles WHERE article_id = $id");
         $images = $this->select("SELECT image_url from article_images WHERE article_id = $id");
         return array("posts" => $posts, "images" => $images);
-    }
 
-    public function login($username, $password)
-    {
-        $obj = [
-            'errUser' => '',
-            'errPass' => '',
-            'reder' => '',
-            'errVeri' => ''
-        ];
-
-
-
-        $stmt = $this->conn->prepare("SELECT * FROM users WHERE username = ?");
-        $stmt->bind_param('s', $username);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if ($result->num_rows == 0) {
-            $obj['errUser'] = 'Nav atrasts profils!';
-            echo json_encode($obj);
-            return;
-        }
-
-        $user = $result->fetch_assoc();
-
-        if (password_verify($password, $user['password'])) {
-            if ($user['verified'] != 0) {
-                $_SESSION["UId"] = $username;
-                $_SESSION['id'] = $user['id'];
-                $obj['reder'] = 1;
-            } else {
-                $obj['errVeri'] = true;
-            }
-        } else {
-            $obj['errPass'] = 'Ievadīta nepareiza parole!';
-        }
-        echo json_encode($obj);
-    }
-
-    public function signUp($username, $email, $pass, $repeat)
-    {
-        $obj = [
-            'errUser' => '',
-            'errPass' => '',
-            'errEmail' => '',
-            'success' => false
-        ];
-
-        if ($pass != $repeat) {
-            $obj['errPass'] = 'Passwords do not match!';
-        }
-
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $obj['errEmail'] = 'Enter a valid email address!';
-        }
-
-        if ($obj['errEmail'] == '' && $obj['errPass'] == '') {
-            $stmt = $this->conn->prepare("SELECT * FROM users_blog WHERE username = ?");
-            $stmt->bind_param('s', $username);
-            $stmt->execute();
-            $stmt->store_result();
-            if ($stmt->num_rows === 0) {
-                $stmt->close();
-
-                $emailExists = $this->select("SELECT * FROM users_blog WHERE email = '$email'");
-                if (empty($emailExists)) {
-                } else {
-                    // Email already exists
-                    $obj['success'] = false;
-                    $obj['errEmail'] = 'Email already in use';
-                }
-            } else {
-                $obj['errUser'] = 'Username already taken!';
-            }
-        }
-        echo json_encode($obj);
-    }
-    public function singleView($id){
-        $data = select("SELECT * FROM `news_articles` WHERE `id` = $id");
-        $single = [
-            'data' => $data
-        ];
-        return $single;
     }
 
 }
