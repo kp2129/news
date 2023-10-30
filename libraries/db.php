@@ -8,12 +8,23 @@ class Database
 
     public function __construct()
     {
+
         $this->conn = new mysqli("localhost", "root", "", "news");
+        if ($this->conn->connect_error) {
+            die("Connection failed: " . $this->conn->connect_error);
+        }
     }
 
     private function query_($query)
     {
         return $this->conn->query($query);
+    }
+
+    public function singleView($id)
+    {
+        $data = $this->select("SELECT * FROM `news_articles` WHERE `article_id` = $id");
+
+        return $data;
     }
 
     public function insert($query)
@@ -45,16 +56,12 @@ class Database
         return $this->query_($query);
     }
 
-    public function find($query)
-    {
-        return $this->query_($query);
-    }
-
     public function prepare($query)
     {
         return $this->conn->prepare($query);
     }
 
+    // atgriež pēdējo ievietoto ID
     public function insertRetId($sql)
     {
         if ($this->conn->query($sql) === true) {
@@ -64,80 +71,24 @@ class Database
         }
     }
 
-    public function login($username, $password)
+    public function GetAllPosts()
     {
-        $obj = [
-            'errUser' => '',
-            'errPass' => '',
-            'reder' => '',
-            'errVeri' => ''
-        ];
-
-
-
-        $stmt = $this->conn->prepare("SELECT * FROM users_blog WHERE username = ?");
-        $stmt->bind_param('s', $username);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if ($result->num_rows == 0) {
-            $obj['errUser'] = 'Nav atrasts profils!';
-        }
-
-        $user = $result->fetch_assoc();
-
-        if (password_verify($password, $user['password'])) {
-            if ($user['verified'] != 0) {
-                $_SESSION["UId"] = $username;
-                $_SESSION['id'] = $user['id'];
-                $obj['reder'] = 1;
-            } else {
-                $obj['errVeri'] = true;
-            }
-        } else {
-            $obj['errPass'] = 'Ievadīta nepareiza parole!';
-        }
-        echo json_encode($obj);
+        $posts = $this->select("SELECT * from news_articles");
+        $images = $this->select("SELECT image_url from article_images");
+        return array("posts" => $posts, "images" => $images);
     }
 
-    public function signUp($username, $email, $pass, $repeat)
+    public function GetPostLikeCount($id)
     {
-        $obj = [
-            'errUser' => '',
-            'errPass' => '',
-            'errEmail' => '',
-            'success' => false
-        ];
-
-        if ($pass != $repeat) {
-            $obj['errPass'] = 'Passwords do not match!';
-        }
-
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $obj['errEmail'] = 'Enter a valid email address!';
-        }
-
-        if ($obj['errEmail'] == '' && $obj['errPass'] == '') {
-            $stmt = $this->conn->prepare("SELECT * FROM users_blog WHERE username = ?");
-            $stmt->bind_param('s', $username);
-            $stmt->execute();
-            $stmt->store_result();
-            if ($stmt->num_rows === 0) {
-                $stmt->close();
-
-                $emailExists = $this->select("SELECT * FROM users_blog WHERE email = '$email'");
-                if (empty($emailExists)) {        
-                } else {
-                    // Email already exists
-                    $obj['success'] = false;
-                    $obj['errEmail'] = 'Email already in use';
-                }
-            } else {
-                $obj['errUser'] = 'Username already taken!';
-            }
-        }
-        echo json_encode($obj);
+        $likes = $this->select(
+            "SELECT article_id, COUNT(like_id) AS like_count
+        FROM article_likes
+        WHERE article_id = $id
+        GROUP BY article_id"
+        );
+        return $likes;
     }
+
     public function singleView($id){
         $obj = new Database();
 
@@ -194,8 +145,12 @@ class Database
         ];
 
         return($comment);
+
+    public function GetPostByID($id)
+    {
+        $posts = $this->select("SELECT * from news_articles WHERE article_id = $id");
+        $images = $this->select("SELECT image_url from article_images WHERE article_id = $id");
+        return array("posts" => $posts, "images" => $images);
     }
 
 }
-
-

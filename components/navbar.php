@@ -27,10 +27,10 @@
             Pieslēgties
         </button>
         <button class="filter-button s-button-style">
-            <i class="bi bi-filter"></i>
+            <img src="svg/filter.svg" alt="filter">
         </button>
         <button class="search-button s-button-style">
-            <i class="bi bi-search"></i>
+            <img src="svg/search.svg" alt="search">
         </button>
     </div>
 </div>
