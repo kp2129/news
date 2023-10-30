@@ -34,7 +34,7 @@ $count = count($data1);
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="scripts/scripts.js"></script>
     <!-- POST TITLE SAMAZINÁT LÍDZ APMÉRAM 7 CHARACTERIEM -->
-    <title>$TITLE</title>
+    <title><?= $single[0][1] ?></title>
 </head>
 
 <!-- content vietā var ielikt no DB php variables -->
