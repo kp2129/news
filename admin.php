@@ -1,8 +1,8 @@
 <?php
-include_once('components/navbar.php')
+include_once('components/navbar.php');
+include_once('libraries/library.php');
 
 // IZVEIDOT CHECK VAI IR ADMINS VAI NAV LIETOJOT role_id no user tabulas
-
 ?>
 
 <!DOCTYPE html>
@@ -28,34 +28,19 @@ include_once('components/navbar.php')
         <div class="left-container">
             <p class="side-title">Jaunākie ieraksti</p>
             <div class="post-container">
-                <div class="post">
-                    <div class="post-image">
-                        <button class="admin-button button-style">x <img src="svg/hand-thumbs-up-fill.svg" alt=""></button>
-                        <button class="admin-button button-style">edit</button>
-                    </div>
-                    <p class="post-title">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, quae.</p>
-
-                </div>
-
-                <div class="post">
-                    <div class="post-image">
-                        <button class="admin-button button-style">x <img src="svg/hand-thumbs-up-fill.svg" alt=""></button>
-
-                        <button class="admin-button button-style">edit</button>
-                    </div>
-                    <p class="post-title">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, quae.</p>
-
-                </div>
+                <?= AdminPage() ?>
             </div>
         </div>
         <!-- REDIĢĒT IERAKSTU -->
         <!-- rediģē selected ierakstu. JA NAV SELECTED, tad display:none top un bottom edit-containeriem -->
         <!-- ja ir JAUNS, tad rediģēt pogu pārdēvēt uz "izveidot" un dzēst pogu noņemt -->
+
+        <!-- script.js ir admin formas funkcionalitāte -->
         <div class="right-container">
             <p class="side-title">Rediģēt ierakstu</p>
             <div class="edit-container">
                 <div class="edit-top-container">
-                    <form action="" class="edit-form">
+                    <form id="edit-form" action="" class="edit-form">
                         <div class="input-container">
                             <p>Virsraksts</p>
                             <input type="text">

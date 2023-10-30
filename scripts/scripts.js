@@ -1,7 +1,5 @@
 $(document).ready(function () {
-  $('.login-button').click(function () {
-    window.location.href = 'login.php';
-  });
+
 
 
   $(".login").submit(function (e) {
@@ -84,7 +82,19 @@ $(document).ready(function () {
         } else {
         }
       }
+
+    $(".login-button").click(function () {
+        window.location.href = "login.php";
+
     });
   });
 
+
 });
+
+
+    $(".admin-button").click(function () {
+        var editForm = document.getElementById("edit-form");
+    });
+});
+

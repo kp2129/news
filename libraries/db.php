@@ -73,12 +73,26 @@ class Database
 
     public function GetAllPosts()
     {
-        return $this->select("SELECT * from news_articles");
+        $posts = $this->select("SELECT * from news_articles");
+        $images = $this->select("SELECT image_url from article_images");
+        return array("posts" => $posts, "images" => $images);
     }
 
+    public function GetPostLikeCount($id)
+    {
+        $likes = $this->select(
+            "SELECT article_id, COUNT(like_id) AS like_count
+        FROM article_likes
+        WHERE article_id = $id
+        GROUP BY article_id"
+        );
+        return $likes;
+    }
     public function GetPostByID($id)
     {
-        return $this->select("SELECT * from news_articles WHERE article_id=$id");
+        $posts = $this->select("SELECT * from news_articles WHERE article_id = $id");
+        $images = $this->select("SELECT image_url from article_images WHERE article_id = $id");
+        return array("posts" => $posts, "images" => $images);
     }
 
 }
