@@ -33,8 +33,26 @@ function AdminPage()
 {
     $db = Sync();
     $allPosts = $db->GetAllPosts();
-
-    foreach ($allPosts as $post => $content) {
-        echo ($post);
+    $i = 0;
+    $result = '';
+    if ($allPosts['posts'] == false) {
+        return '<p>No posts here!</p>';
     }
+    foreach ($allPosts['posts'] as $post => $content) {
+        $likeCount = $db->GetPostLikeCount($content[0]);
+        // return $likeCount[0];
+        $result .= '
+        <div class="post">
+            <div class="post-image" style="background-image: linear-gradient(to bottom,transparent,rgba(0, 0, 0, 0.75)),url(' . $allPosts['images'][$i][0] . ');">
+                <button class="admin-button button-style">' . sizeof($likeCount) . ' <img src="svg/hand-thumbs-up-fill.svg" alt=""></button>
+                <button class="admin-button button-style" id="' . $content[0] . '">edit</button>
+            </div>
+            <p class="post-title">' . $content[1] . '</p>
+
+        </div>
+        ';
+        $i++;
+    }
+
+    return $result;
 }

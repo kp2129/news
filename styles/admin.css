@@ -31,12 +31,6 @@
 }
 
 .post-image {
-    background-image: linear-gradient(
-            to bottom,
-            transparent,
-            rgba(0, 0, 0, 0.75)
-        ),
-        url("https://ichef.bbci.co.uk/news/976/cpsprodpb/EF66/production/_98268216_gettyimages-826469180-1.jpg.webp");
     background-size: cover;
     border-radius: 15px;
     width: 100%;
