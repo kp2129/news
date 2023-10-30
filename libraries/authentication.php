@@ -26,22 +26,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 function login($conn, $username, $password)
 {
-    $obj = [
-        'errUser' => '',
-        'errPass' => '',
-        'reder' => '',
-        'errVeri' => ''
-    ];
-
+    $returnOBJ = ["error" => "", "success" => false];
     if (empty($username)) {
-        $obj['errUser'] = 'Username is required.';
-        echo json_encode($obj);
+        $returnOBJ['error'] = 'Username is required.';
+        echo json_encode($returnOBJ);
         return;
     }
 
     if (empty($password)) {
-        $obj['errPass'] = 'Password is required.';
-        echo json_encode($obj);
+        $returnOBJ['error'] = 'Password is required.';
+        echo json_encode($returnOBJ);
         return;
     }
 
@@ -51,58 +45,76 @@ function login($conn, $username, $password)
     $result = $stmt->get_result();
 
     if ($result->num_rows == 0) {
-        $obj['errUser'] = 'Profile not found!';
-        echo json_encode($obj);
+        $returnOBJ['error'] = 'Incorrect Password or Username';
+        echo json_encode($returnOBJ);
         return;
     }
 
     $user = $result->fetch_assoc();
+    // echo json_encode($user);
+    // return $user;
 
-    if (password_verify($password, $user['password'])) {
-        if ($user['verified'] != 0) {
-            session_start(); // Start the session
-            $_SESSION["UId"] = $username;
-            $_SESSION['id'] = $user['id'];
-            $obj['reder'] = 1;
-        } else {
-            $obj['errVeri'] = true;
-        }
+    // if (password_verify($password, $user['password'])) {
+    //     if ($user['verified'] != 0) {
+    //         session_start(); // Start the session
+    //         $_SESSION["UId"] = $username;
+    //         $_SESSION['id'] = $user['id'];
+    //         $err = 'b';
+    //         echo json_encode($err);
+    //         return;
+    //     } else {
+    //         $err = "Not verified";
+    //         echo json_encode($err);
+    //         return;
+    //     }
+    // } else {
+    //     $err = 'Incorrect Password or Username 1';
+    //     echo json_encode($err);
+    //     return;
+    // }
+
+    if ($user['password'] == $password) {
+        $_SESSION["UId"] = $username;
+        $_SESSION['id'] = $user['user_id'];
+        $_SESSION['role'] = $user['role_id'];
+        $returnOBJ['success'] = true;
+        echo json_encode($returnOBJ);
+        return;
     } else {
-        $obj['errPass'] = 'Incorrect password entered!';
+        $returnOBJ['error'] = 'Incorrect Password or Username';
+        echo json_encode($returnOBJ);
+        return;
     }
-    echo json_encode($obj);
 }
 
 function signUp($conn, $username, $email, $pass, $repeat)
 {
     $obj = [
-        'errUser' => '',
-        'errPass' => '',
-        'errEmail' => '',
+        'error' => '',
         'success' => false
     ];
 
     if (empty($username)) {
-        $obj['errUser'] = 'Username is required.';
+        $obj['error'] = 'Username is required.';
         echo json_encode($obj);
         return;
     }
 
     if (empty($pass)) {
-        $obj['errPass'] = 'Password is required.';
+        $obj['error'] = 'Password is required.';
         echo json_encode($obj);
         return;
     }
 
     if ($pass != $repeat) {
-        $obj['errPass'] = 'Passwords do not match!';
+        $obj['error'] = 'Passwords do not match!';
     }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $obj['errEmail'] = 'Enter a valid email address!';
+        $obj['error'] = 'Enter a valid email address!';
     }
 
-    if ($obj['errEmail'] == '' && $obj['errPass'] == '' && $obj['errUser'] == '') {
+    if ($obj['error'] == '') {
         $stmt = $conn->prepare("SELECT * FROM users_blog WHERE username = ?");
         $stmt->bind_param('s', $username);
         $stmt->execute();
@@ -115,12 +127,11 @@ function signUp($conn, $username, $email, $pass, $repeat)
                 $obj['success'] = true;
             } else {
                 // Email already exists
-                $obj['errEmail'] = 'Email already in use';
+                $obj['error'] = 'Email already in use';
             }
         } else {
-            $obj['errUser'] = 'Username already taken!';
+            $obj['error'] = 'Username already taken!';
         }
     }
     echo json_encode($obj);
 }
-?>
