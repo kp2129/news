@@ -42,6 +42,23 @@ $(document).ready(function () {
     });
   });
 
+  $(".admin-button").click(function () {
+    var buttonId = $(this).attr("id");
+    alert(buttonId)
+    $.ajax({
+      url: "libraries/admin.php", // Specify the URL of your backend script
+      type: "POST",
+      data: { buttonId: buttonId }, // Send the button's id as POST data
+      success: function (response) {
+        // Handle the response from the server, if needed
+        console.log(response);
+      },
+      error: function (error) {
+        // Handle any errors, if they occur
+        console.log("Error: " + JSON.stringify(error));
+      }
+    });
+  });
 
   $(".register").submit(function (e) {
     e.preventDefault();
@@ -83,18 +100,20 @@ $(document).ready(function () {
         }
       }
 
-    $(".login-button").click(function () {
-        window.location.href = "login.php";
 
     });
+
+
   });
 
 
+  $(".admin-button").click(function () {
+    var editForm = document.getElementById("edit-form");
+  });
 });
 
 
-    $(".admin-button").click(function () {
-        var editForm = document.getElementById("edit-form");
-    });
-});
+$(".login-button").click(function () {
+  window.location.href = "login.php";
 
+});
