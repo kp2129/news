@@ -28,7 +28,7 @@ function IndexPage()
     return array($mainPosts, $otherPosts);
 }
 
-// ROBERTS
+// SALIEK VISUS ADMIN PAGE POSTUS
 function AdminPage()
 {
     $db = Sync();
