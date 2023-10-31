@@ -19,6 +19,8 @@ $db = new Database;
 </head>
 
 <body>
+    <?php print_r($_SESSION) ?>
+
     <!-- saņem no DB visus ierakstus. pirmie 2 ir lielie, pārējie ir mazie varianti -->
     <!-- skatīt pēc figma stila -->
     <div class="container">
