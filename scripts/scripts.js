@@ -1,121 +1,221 @@
 $(document).ready(function () {
-
-
-
   $(".login").submit(function (e) {
-    e.preventDefault();
+      e.preventDefault();
 
-    // Clear previous error messages
-    $(".error").text("");
+      // Clear previous error messages
+      $(".error").text("");
 
-    // Get form data
-    var username = $("input[name='username']").val();
-    var password = $("input[name='password']").val();
+      // Get form data
+      var username = $("input[name='username']").val();
+      var password = $("input[name='password']").val();
 
-    // Prepare data to send
-    var data = {
-      action: "login",
-      username: username,
-      password: password
-    };
+      // Prepare data to send
+      var data = {
+          action: "login",
+          username: username,
+          password: password,
+      };
 
-    // Send data to the backend using AJAX
-    $.ajax({
-      type: "POST",
-      url: "libraries/authentication.php", // Replace with your backend script URL
-      data: data,
-      success: function (response) {
-        console.log(response)
-        if (response.error) {
-          if (response.errUser) {
-            $(".errUser").text(response.errUser);
-          }
-          if (response.errPass) {
-            $(".errPass").text(response.errPass);
-          }
-          if (response.errVeri) {
-            $(".errVeri").text(response.errVeri);
-          }
-        } else {
-        }
-      }
-    });
+      // Send data to the backend using AJAX
+      $.ajax({
+          method: "POST", // Use the appropriate HTTP method
+          dataType: "json", // Expect JSON response
+          url: "libraries/authentication.php", // Replace with your backend script URL
+          data: data,
+          success: function (response) {
+              console.log(response);
+              if (response.error) {
+                  $(".err").text(response.error).css("color", "red");
+              } else if (response.success) {
+                  window.location.href = "index.php";
+              }
+          },
+      });
   });
+
+  var selectedArticleId = null;
 
   $(".admin-button").click(function () {
     var buttonId = $(this).attr("id");
-    alert(buttonId)
+    console.log(buttonId);
+
     $.ajax({
-      url: "libraries/admin.php", // Specify the URL of your backend script
-      type: "POST",
-      data: { buttonId: buttonId }, // Send the button's id as POST data
-      success: function (response) {
-        // Handle the response from the server, if needed
-        console.log(response);
-      },
-      error: function (error) {
-        // Handle any errors, if they occur
-        console.log("Error: " + JSON.stringify(error));
-      }
+        url: "libraries/admin.php",
+        type: "POST",
+        data: { buttonId: buttonId },
+        dataType: "json",
+        success: function (response) {
+            // Handle the response from the server
+            console.log(response);
+
+            // Populate the form with data
+            var titleInput = document.querySelector('input[name="title"]');
+            var imageInput = document.querySelector('input[name="image_url"]');
+            var authorInput = document.querySelector('input[name="author"]');
+            var contentTextarea = document.querySelector('textarea[name="content"]');
+
+            titleInput.value = response.title;
+            imageInput.value = response.image_url;
+            authorInput.value = response.author;
+            contentTextarea.value = response.content;
+
+            // Store the selected article's ID
+            selectedArticleId = response.article_id;
+            if (!document.querySelector("#delete-article-button")) {
+                // Create the "Dzēst" button
+                var deleteButton = document.createElement("button");
+                deleteButton.className = "edit-button button-style";
+                deleteButton.innerHTML = "Dzēst";
+                deleteButton.id = "delete-article-button"; // Set the button's ID
+                deleteButton.addEventListener("click", function () {
+                    // Implement the logic to delete the selected article
+                    // You can use AJAX to send the data to the server for deletion
+                });
+
+                // Append the "Dzēst" button to the edit-bottom-container
+                var editBottomContainer = document.querySelector('.edit-bottom-container');
+                editBottomContainer.appendChild(deleteButton);
+            }
+        },
+        error: function (error) {
+            // Handle any errors, if they occur
+            console.log("Error: " + JSON.stringify(error));
+        }
     });
-  });
-
-  $(".register").submit(function (e) {
+});
+  // Event listener for the "Saglabāt" (Save) button
+  $(".edit-button.button-style").click(function (e) {
     e.preventDefault();
+    if (selectedArticleId !== null) {
+        var formData = {
+            id: selectedArticleId,
+            title: $('input[name="title"]').val(),
+            image_url: $('input[name="image_url"]').val(),
+            author: $('input[name="author"]').val(),
+            content: $('textarea[name="content"]').val()
+        };
+        console.log(formData);
+    }
+});
+  
+  // Event listener for the "Dzēst" (Delete) button
+  $(document).on("click", "#delete-article-button", function () {
+    if (selectedArticleId !== null) {
+        $.ajax({
+            type: "POST",
+            url: "libraries/libary.php",
+            data: selectedArticleId,
+            success: function (response) {
+                console.log(response);
+            }
+        });
+    }
+});
 
-    // Clear previous error messages
-    $(".error").text("");
+  
+$(".register").submit(function (e) {
+  e.preventDefault();
 
-    // Get form data
-    var username = $("input[name='username']").val();
-    var email = $("input[name='email']").val();
-    var password = $("input[name='password']").val();
+  // Clear previous error messages
+  $(".error").text("");
 
-    // Prepare data to send
-    var data = {
+  // Get form data
+  var username = $("input[name='username']").val();
+  var email = $("input[name='email']").val();
+  var password = $("input[name='password']").val();
+
+  // Prepare data to send
+  var data = {
       action: "signup",
       username: username,
       email: email,
       password: password
-    };
+  };
 
-    // Send data to the backend using AJAX
-    $.ajax({
+  // Send data to the backend using AJAX
+  $.ajax({
       type: "POST",
       url: "libraries/authentication.php", // Replace with your backend script URL
       data: data,
       success: function (response) {
-        console.log(response)
-        if (response.error) {
-          if (response.errUser) {
-            $(".errUser").text(response.errUser);
+          console.log(response);
+          if (response.error) {
+              if (response.errUser) {
+                  $(".errUser").text(response.errUser);
+              }
+              if (response.errPass) {
+                  $(".errPass").text(response.errPass);
+              }
+              if (response.errVeri) {
+                  $(".errVeri").text(response.errVeri);
+              }
           }
-          if (response.errPass) {
-            $(".errPass").text(response.errPass);
-          }
-          if (response.errVeri) {
-            $(".errVeri").text(response.errVeri);
-          }
-        } else {
-        }
       }
-
-
-    });
-
-
-  });
-
-
-  $(".admin-button").click(function () {
-    var editForm = document.getElementById("edit-form");
   });
 });
 
 
-$(".login-button").click(function () {
-  window.location.href = "login.php";
 
+    $(".admin-button").click(function () {
+        var buttonId = $(this).attr("id");
+        alert(buttonId);
+        $.ajax({
+            url: "libraries/admin.php", // Specify the URL of your backend script
+            type: "POST",
+            data: { buttonId: buttonId }, // Send the button's id as POST data
+            success: function (response) {
+                // Handle the response from the server, if needed
+                console.log(response);
+            },
+            error: function (error) {
+                // Handle any errors, if they occur
+                console.log("Error: " + JSON.stringify(error));
+            },
+        });
+    });
+
+
+    $(".register").submit(function (e) {
+        e.preventDefault();
+
+        // Clear previous error messages
+        $(".error").text("");
+
+        // Get form data
+        var username = $("input[name='username']").val();
+        var email = $("input[name='email']").val();
+        var password = $("input[name='password']").val();
+
+        // Prepare data to send
+        var data = {
+            action: "signup",
+            username: username,
+            email: email,
+            password: password,
+        };
+
+        // Send data to the backend using AJAX
+        $.ajax({
+            method: "POST", // Use the appropriate HTTP method
+            dataType: "json", // Expect JSON response
+            url: "libraries/authentication.php", // Replace with your backend script URL
+            data: data,
+            success: function (response) {
+                console.log(response);
+                if (response["error"]) {
+                    $(".err").text(response["error"]).css("color", "red");
+                }
+            },
+        });
+    });
+
+    $(".admin-button").click(function () {
+        var editForm = document.getElementById("edit-form");
+    });
+});
+
+$(".login-button").click(function () {
+    window.location.href = "login.php";
 });
 
 function comment(post, user, date){
