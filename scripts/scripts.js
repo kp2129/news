@@ -117,3 +117,35 @@ $(".login-button").click(function () {
   window.location.href = "login.php";
 
 });
+
+function comment(post, user, date){
+  let contest = $('#contest').val();
+  let form = $('#comment-entry-container');
+
+  $.ajax({
+      url: "../libraries/comment.php",
+      type: "POST",
+      dataType: "json",
+      data: {constest: contest, post: post},
+      success: function(result){
+          console.log(result);
+          if(result.msg == ''){
+            $('#errContest').text(result.errContest);
+            $('#msg').text('');
+          }else{
+            $('#errContest').text('');
+            $('#msg').text(result.msg);
+            form.append(`
+            <div class="comment-head">
+              <p class="comment-author">`+user+`</p>
+              <p class="comment-date">`+date+`</p>
+            </div>
+              <p class="comment-content">`+contest+`</p>
+          `);
+          }
+      },
+      error: function(error){
+          console.log(error.responseText);
+      }
+  });
+}

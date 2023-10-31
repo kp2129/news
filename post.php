@@ -1,6 +1,9 @@
 <?php
 include_once('components/navbar.php');
 include('libraries/db.php');
+date_default_timezone_set('Europe/Riga');
+$date = date('Y-m-d h:i:s');
+
 
 $database = new Database();
 
@@ -20,6 +23,7 @@ $img = json_decode($single[0][9]);
 
 $data1 = $database->suggestion($single[0][6]);
 $count = count($data1);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,13 +76,19 @@ $count = count($data1);
                 </p>
                 <!-- forma -->
                 <div class="comment-submit-container">
-                    <textarea name="" id="" cols="30" rows="10" class="comment-input">Ievadi komentāru!</textarea>
-                    <button class="comment-submit-button button-style">Publicēt</button>
+                <?php if(isset($_SESSION['Uid'])){ ?>
+                    <textarea name="" id="contest" cols="30" rows="10" class="comment-input">Ievadi komentāru!</textarea>
+                    <button class="comment-submit-button button-style" onclick = "comment($_GET['id'], $_SESSION['Uid'], $date)">Publicēt</button>
+                    <p id = "errContest"></p>
+                    <p id = "msg"></p>
+                <?php }else{ ?>
+                    <textarea name="" id="contest" cols="30" rows="10" class="comment-input" disabled="disabled">Lai ievadītu komentāru, lūdzu reģistrēties</textarea>
+                <?php } ?>
                 </div>
                 <!-- komentāri  -->
                 <!-- LAI RĀDĪTU KOMENTĀRUS, KOPĒT comment-entry-container un ievadīt katra komentāra datus -->
                 <?php foreach ($comment as $dati) { ?>
-                    <div class="comment-entry-container">
+                    <div class="comment-entry-container" id = "comment-entry-container">
                         <div class="comment-head">
                             <p class="comment-author"><?= $dati[2] ?></p>
                             <p class="comment-date"><?= $dati[4] ?></p>
