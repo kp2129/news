@@ -2,24 +2,24 @@
     <div class="left-side">
         <a href="index.php" class="nav-logo">NEWS</a>
         <div class="topic-container">
-            <button class="topic-button">
-                Ziņas
-            </button>
-            <button class="topic-button">
+            <a href="http://localhost/news/index.php?category=Technology" class = "topic-button">
+                Tehnoloģijas
+            </a>
+            <a href="http://localhost/news/index.php?category=Sports" class = "topic-button">
                 Sports
-            </button>
-            <button class="topic-button">
-                Mūzika
-            </button>
-            <button class="topic-button">
-                Dārzs
-            </button>
-            <button class="topic-button">
+            </a>
+            <a href="http://localhost/news/index.php?category=Science" class = "topic-button">
+                Zinātne
+            </a>
+            <a href="http://localhost/news/index.php?category=Weather" class = "topic-button">
+                Laikapstākļi
+            </a>
+            <a href="http://localhost/news/index.php?category=Entertainment" class = "topic-button">
                 Izklaide
-            </button>
-            <button class="topic-button">
-                Politika
-            </button>
+            </a>
+            <a href="http://localhost/news/index.php?category=Health" class = "topic-button">
+                Veselība
+            </a>
         </div>
     </div>
     <div class="right-side">
