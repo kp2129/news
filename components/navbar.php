@@ -23,9 +23,7 @@
         </div>
     </div>
     <div class="right-side">
-        <button class="login-button button-style">
-            Pieslēgties
-        </button>
+        <button id="log-button" class="login-button button-style"> Pieslēgties</button>
         <button class="filter-button s-button-style">
             <img src="svg/filter.svg" alt="filter">
         </button>

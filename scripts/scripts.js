@@ -1,4 +1,26 @@
 $(document).ready(function () {
+
+    $.get("libraries/session_status.php", function (data) {
+        if (data === "active") {
+            // Change the button's class name if the session is active
+            button = document.getElementById("log-button");
+            button.className = "logoff-button";
+            button.innerText = "New Button Text";
+        } else {
+            // Change the button's class name if the session is inactive
+            button = document.getElementById("log-button");
+            button.className = "log-button";
+            button.innerText = "New Button Text";
+        }
+    });
+
+    $(".login").submit(function (e) {
+        e.preventDefault();
+
+        // Get form data
+        var username = $("input[name='username']").val();
+        var password = $("input[name='password']").val();
+
   $(".login").submit(function (e) {
       e.preventDefault();
 
@@ -8,6 +30,7 @@ $(document).ready(function () {
       // Get form data
       var username = $("input[name='username']").val();
       var password = $("input[name='password']").val();
+
 
       // Prepare data to send
       var data = {
@@ -102,9 +125,16 @@ $(document).ready(function () {
   $(document).on("click", "#delete-article-button", function () {
     if (selectedArticleId !== null) {
         $.ajax({
+
+            method: "POST",
+            dataType: "json",
+            url: "libraries/authentication.php",
+            data: data,
+
             type: "POST",
             url: "libraries/libary.php",
             data: selectedArticleId,
+
             success: function (response) {
                 console.log(response);
             }
@@ -178,9 +208,6 @@ $(".register").submit(function (e) {
     $(".register").submit(function (e) {
         e.preventDefault();
 
-        // Clear previous error messages
-        $(".error").text("");
-
         // Get form data
         var username = $("input[name='username']").val();
         var email = $("input[name='email']").val();
@@ -196,21 +223,54 @@ $(".register").submit(function (e) {
 
         // Send data to the backend using AJAX
         $.ajax({
-            method: "POST", // Use the appropriate HTTP method
-            dataType: "json", // Expect JSON response
-            url: "libraries/authentication.php", // Replace with your backend script URL
+            method: "POST",
+            dataType: "json",
+            url: "libraries/authentication.php",
             data: data,
             success: function (response) {
-                console.log(response);
+                console.log("success");
                 if (response["error"]) {
                     $(".err").text(response["error"]).css("color", "red");
+                } else if (response.success) {
+                    window.location.href = "login.php";
+                }
+            },
+            error: function (response) {
+                console.log("error");
+                console.log(responsea);
+                if (response["error"]) {
+                    $(".err").text(response["error"]).css("color", "red");
+                } else if (response.success) {
+                    window.location.href = "login.php";
                 }
             },
         });
     });
 
-    $(".admin-button").click(function () {
-        var editForm = document.getElementById("edit-form");
+    $(".logoff-button").click(function (e) {
+        e.preventDefault();
+
+        // Prepare data to send
+        var data = {
+            action: "logoff",
+        };
+
+        // Send data to the backend using AJAX
+        $.ajax({
+            method: "POST",
+            dataType: "json",
+            url: "libraries/authentication.php",
+            data: data,
+            success: function (response) {
+                console.log("success");
+                console.log(response);
+                location.reload(true);
+            },
+            error: function (response) {
+                console.log("error");
+                console.log(response);
+            },
+        });
     });
 });
 
