@@ -22,27 +22,24 @@ include_once('components/navbar.php')
 <body>
     <form method="POST" class="cont register">
         <div class="border">
-            <div class="title">
-                <h1>Pieslēgties</h1>
+            <div class="login-title">Reģistrēties</div>
+            <p class="err">MAn</p>
+            <div class="input">
+                <p>Lietotājvārds</p>
+                <input type="text" name="username">
             </div>
             <div class="input">
-                <div class="user">
-                    <p>Lietotājvārds</p>
-                </div>
-                <input type="text" name="username">
-                <div class="pass">
-                    <p>E-pasts</p>
-                </div>
-                <input type="text" name="email">
-                <div class="pass">
-                    <p>Parole</p>
-                </div>
+                <p>Parole</p>
                 <input type="text" name="password">
+            </div>
+            <div class="input">
+                <p>Epasts</p>
+                <input type="text" name="email">
             </div>
             <div class="submit">
                 <button>Pieslēgties</button>
-
             </div>
+            <a href="login.php" class="switch-login">esi lietotājs?</a>
         </div>
     </form>
 </body>

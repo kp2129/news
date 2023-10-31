@@ -1,13 +1,25 @@
 <?php
 include_once('components/navbar.php');
 include('libraries/db.php');
-$db = new Database;
 
-// skatās pēc $_GET['id'], saskaņot ar DB
+$database = new Database();
+
 $id = $_GET['id'];
-$data = $db->singleView($id);
 
-print_r($data);
+$data = $database->single($id);
+$single = $data['data'];
+
+$data1 = $database->comments($id);
+$comment = $data1['data'];
+
+// echo '<pre>';
+// echo var_dump($single);
+// echo '</pre>';
+// print_r($single[0][8]);
+$img = json_decode($single[0][9]);
+
+$data1 = $database->suggestion($single[0][6]);
+$count = count($data1);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +34,7 @@ print_r($data);
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="scripts/scripts.js"></script>
     <!-- POST TITLE SAMAZINÁT LÍDZ APMÉRAM 7 CHARACTERIEM -->
-    <title>$TITLE</title>
+    <title><?= $single[0][1] ?></title>
 </head>
 
 <!-- content vietā var ielikt no DB php variables -->
@@ -39,17 +51,17 @@ print_r($data);
             <button class="post-like-button button-style">
                 <i class="bi bi-hand-thumbs-up"></i>
             </button>
-            <img class="post-image" src="https://ichef.bbci.co.uk/news/976/cpsprodpb/EF66/production/_98268216_gettyimages-826469180-1.jpg.webp" alt="">
-            <p class="post-title">$TITLE</p>
+            <img class="post-image" src="<?= $img[0] ?>" alt="">
+            <p class="post-title"><?= $single[0][1] ?></p>
 
             <div class="post-details-container">
-                <p class="post-details">$AUTORS • $CREATION_DATE • $LIKE_COUNT</p>
+                <p class="post-details"><?= $single[0][7] ?> • <?= $single[0][3] ?> • <?= $single[0][10] ?></p>
                 <i class="bi bi-hand-thumbs-up-fill"></i>
             </div>
 
             <div class="post-content-container">
                 <p class="post-content">
-                    $CONTENT
+                    <?= $single[0][2] ?>
                 </p>
             </div>
 
@@ -65,20 +77,15 @@ print_r($data);
                 </div>
                 <!-- komentāri  -->
                 <!-- LAI RĀDĪTU KOMENTĀRUS, KOPĒT comment-entry-container un ievadīt katra komentāra datus -->
-                <div class="comment-entry-container">
-                    <div class="comment-head">
-                        <p class="comment-author">$AUTHOR</p>
-                        <p class="comment-date">$DATE</p>
+                <?php foreach ($comment as $dati) { ?>
+                    <div class="comment-entry-container">
+                        <div class="comment-head">
+                            <p class="comment-author"><?= $dati[2] ?></p>
+                            <p class="comment-date"><?= $dati[4] ?></p>
+                        </div>
+                        <p class="comment-content"><?= $dati[3] ?></p>
                     </div>
-                    <p class="comment-content">$CONTENT</p>
-                </div>
-                <div class="comment-entry-container">
-                    <div class="comment-head">
-                        <p class="comment-author">Author</p>
-                        <p class="comment-date">2023-10-23</p>
-                    </div>
-                    <p class="comment-content">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur at aliquam, minima, quod incidunt quas vel pariatur ad dignissimos distinctio iure, iste odit! Optio laudantium quod, ad quisquam iusto commodi.</p>
-                </div>
+                <?php } ?>
             </div>
 
         </div>
@@ -88,20 +95,13 @@ print_r($data);
             <p class="suggestions-title">
                 Priekš Jums
             </p>
-            <a href="#" class="m-post-container">
-                <img class="m-post-image" src="https://ichef.bbci.co.uk/news/976/cpsprodpb/EF66/production/_98268216_gettyimages-826469180-1.jpg.webp" alt="">
-                <p class="m-post-title">LOL JK, Putins izsaka. Mediji pārstei...</p>
+            <?php foreach($data1 as $sugg){
+                if($sugg[0] != $single[0][0]){?>
+            <a href="?id=<?=$sugg[0]?>" class="m-post-container">
+                <img class="m-post-image" src="<?=$sugg[8]?>" alt="">
+                <p class="m-post-title"><?=$sugg[1]?></p>
             </a>
-
-            <a href="#" class="m-post-container">
-                <img class="m-post-image" src="https://ichef.bbci.co.uk/news/976/cpsprodpb/EF66/production/_98268216_gettyimages-826469180-1.jpg.webp" alt="">
-                <p class="m-post-title">LOL JK, Putins izsaka. Mediji pārstei...</p>
-            </a>
-
-            <a href="#" class="m-post-container">
-                <img class="m-post-image" src="https://ichef.bbci.co.uk/news/976/cpsprodpb/EF66/production/_98268216_gettyimages-826469180-1.jpg.webp" alt="">
-                <p class="m-post-title">LOL JK, Putins izsaka. Mediji pārstei...</p>
-            </a>
+            <?php }} ?>
         </div>
     </div>
 </body>

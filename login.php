@@ -2,10 +2,15 @@
 include_once('components/navbar.php');
 include_once('libraries/db.php');
 
+if (isset($_SESSION)) {
+    if (isset($_SESSION['UId'])) {
+        header("Location: index.php");
+        exit; // Important: After a redirect, exit the script to prevent further execution
+    }
+}
 
 
-
-
+print_r($_SESSION)
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,28 +30,24 @@ include_once('libraries/db.php');
 
 
 <body>
-<form method="POST" class="cont login">
+    <form method="POST" class="cont login">
         <div class="border">
-            <div class="title">
-                <h1>Pieslēgties</h1>
+            <div class="login-title">
+                Pieslēgties
             </div>
-            <input type="hidden" name="action" value="login">
-
+            <p class="err">MAn</p>
             <div class="input">
-                <div class="user">
-                    <p>Lietotājvārds</p>
-                </div>
+                <p>Lietotājvārds</p>
                 <input type="text" name="username">
-                <span class="error errUser"></span> 
-                <div class="pass">
-                    <p>Parole</p>
-                </div>
-                <input type="password" name="password">
-                <span class="error errPass"></span> 
+            </div>
+            <div class="input">
+                <p>Parole</p>
+                <input type="text" name="password">
             </div>
             <div class="submit">
-                <button type="submit">Pieslēgties</button>
+                <button>Pieslēgties</button>
             </div>
+            <a href="register.php" class="switch-login">neesi lietotājs?</a>
         </div>
     </form>
 </body>
