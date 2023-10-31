@@ -1,6 +1,10 @@
 <?php
 include_once('components/navbar.php');
 include_once('libraries/library.php');
+include_once('libraries/db.php');
+$conn = new Database;
+$categories = $conn->select("SELECT * FROM categories");
+
 
 // IZVEIDOT CHECK VAI IR ADMINS VAI NAV LIETOJOT role_id no user tabulas
 ?>
@@ -43,31 +47,35 @@ include_once('libraries/library.php');
                     <form id="edit-form" action="" class="edit-form">
                         <div class="input-container">
                             <p>Virsraksts</p>
-                            <input type="text">
+                            <input type="text" name="title">
                         </div>
                         <div class="input-container">
-                            <p>Bildes lokācija</p>
-                            <input type="text">
+                            <p>Bilde</p>
+                            <input type="text" name="image_url">
                         </div>
                         <div class="input-container">
                             <p>Autors</p>
-                            <input type="text">
+                            <input type="text" name="author">
                         </div>
                         <div class="input-container">
                             <p>Kategorija</p>
                             <select name="kategorija">
-                                <option value="0">Example</option>
+                                <?php
+                                foreach($categories as $categorie){
+                                    echo "<option value=".$categorie[0].">".$categorie[1]."</option>";
+                                }
+                                ?>
                             </select>
                         </div>
                         <div class="input-container">
                             <p>Saturs</p>
-                            <textarea class='input-textarea' name="" id="" cols="30" rows="13"></textarea>
+                            <textarea  name="content" class='input-textarea' name="" id="" cols="30" rows="13"></textarea>
+                            
                         </div>
                 </div>
                 <div class="edit-bottom-container">
-                    <button class="edit-button button-style">Dzēst</button>
-                    <button class="edit-button button-style">Rediģēt</button>
-                    <button class="edit-button button-style">Jauns</button>
+                    <button class="edit-button button-style">Saglabāt</button>
+                    
                 </div>
                 </form>
             </div>

@@ -1,4 +1,6 @@
 <?php
+header('Content-Type: application/json'); // Set the content type to JSON
+
 if (isset($_POST['buttonId'])) {
     $id = $_POST['buttonId'];
     require_once("db.php");
@@ -22,10 +24,28 @@ if (isset($_POST['buttonId'])) {
         FROM article_likes AS al
         WHERE al.article_id = a.article_id
     ) AS like_count
-FROM news_articles AS a
-LEFT JOIN categories AS c ON a.category_id = c.category_id
-LEFT JOIN users AS u ON a.author_id = u.user_id
-WHERE a.article_id = $id;
-");
-    print_r($result);
+    FROM news_articles AS a
+    LEFT JOIN categories AS c ON a.category_id = c.category_id
+    LEFT JOIN users AS u ON a.author_id = u.user_id
+    WHERE a.article_id = $id;
+    ");
+    
+    $images = json_decode($result[0][8]);
+    // $imageUrl = $images[0]; 
+    // Create an associative array to structure the response
+    $response = array(
+        'article_id' => $result[0][0],
+        'title' => $result[0][1],
+        'content' => $result[0][2],
+        'published_date' => $result[0][3],
+        'source' => $result[0][4],
+        'views' => $result[0][5],
+        'category' => $result[0][6],
+        'author' => $result[0][7],
+        'image_url' => $images[0], // The image URL
+        'like_count' => $result[0][9]
+    );
+
+    echo json_encode($response);
 }
+?>

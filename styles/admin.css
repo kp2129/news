@@ -77,6 +77,8 @@
 
 .edit-bottom-container {
     /* display: none; */
+    width: 100%;
+    text-align: center;
 }
 
 .input-container {

@@ -1,6 +1,8 @@
 <?php
 require_once("db.php");
 
+print_r($_POST);
+
 function Sync()
 {
     return $db = new Database();

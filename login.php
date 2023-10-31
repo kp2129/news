@@ -3,14 +3,7 @@ include_once('components/navbar.php');
 include_once('libraries/db.php');
 
 
-print_r($_POST);
-if (isset($_POST['username']) && isset($_POST['password'])) {
-    $db = new Database;
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $result = $db->login($username, $password);
-    print_r($result);
-}
+
 
 
 ?>
