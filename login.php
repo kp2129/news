@@ -6,9 +6,11 @@ if (isset($_SESSION)) {
     if (isset($_SESSION['UId'])) {
         header("Location: index.php");
         exit; // Important: After a redirect, exit the script to prevent further execution
-
     }
 }
+
+
+print_r($_SESSION)
 
 ?>
 <!DOCTYPE html>
