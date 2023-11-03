@@ -26,7 +26,10 @@ if(!empty($single[0][9])){
 $data1 = $database->suggestion($single[0][6]);
 $count = count($data1);
 
+
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -78,7 +81,7 @@ $count = count($data1);
                 </p>
                 <!-- forma -->
                 <div class="comment-submit-container">
-                <?php if(isset($_SESSION['Uid'])){ ?>
+                <?php if(isset($_SESSION['UId'])){ ?>
                     <textarea name="" id="contest" cols="30" rows="10" class="comment-input">Ievadi komentāru!</textarea>
                     <button class="comment-submit-button button-style" onclick = "comment($_GET['id'], $_SESSION['Uid'], $date)">Publicēt</button>
                     <p id = "errContest"></p>
