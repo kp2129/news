@@ -18,8 +18,10 @@ $comment = $data1['data'];
 // echo '<pre>';
 // echo var_dump($single);
 // echo '</pre>';
-// print_r($single[0][8]);
-$img = json_decode($single[0][9]);
+print_r($single[0]);
+if(!empty($single[0][9])){
+    $img = json_decode($single[0][9]);
+}
 
 $data1 = $database->suggestion($single[0][6]);
 $count = count($data1);
@@ -53,7 +55,7 @@ $count = count($data1);
         <!-- kreisā daļa (Post sadaļa) -->
         <div class="post-container">
             <button class="post-like-button button-style">
-                <i class="bi bi-hand-thumbs-up"></i>
+                <i class="bi bi-hand-thumbs-up"><?= $single[0][10]?></i>
             </button>
             <img class="post-image" src="<?= $img[0] ?>" alt="">
             <p class="post-title"><?= $single[0][1] ?></p>

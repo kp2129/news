@@ -1,26 +1,18 @@
 <div class="nav-container">
     <div class="left-side">
         <a href="index.php" class="nav-logo">NEWS</a>
-        <div class="topic-container">
-            <a href="http://localhost/news/index.php?category=Technology" class = "topic-button">
-                Tehnoloģijas
-            </a>
-            <a href="http://localhost/news/index.php?category=Sports" class = "topic-button">
-                Sports
-            </a>
-            <a href="http://localhost/news/index.php?category=Science" class = "topic-button">
-                Zinātne
-            </a>
-            <a href="http://localhost/news/index.php?category=Weather" class = "topic-button">
-                Laikapstākļi
-            </a>
-            <a href="http://localhost/news/index.php?category=Entertainment" class = "topic-button">
-                Izklaide
-            </a>
-            <a href="http://localhost/news/index.php?category=Health" class = "topic-button">
-                Veselība
-            </a>
-        </div>
+
+
+        <form action="index.php" method="get" class="topic-container">
+            <button type="submit" class="topic-button">Ziņas</button>
+            <button type="submit" class="topic-button" name="topic" value="Technology">Technology</button>
+            <button type="submit" class="topic-button" name="topic" value="Science">Science</button>
+            <button type="submit" class="topic-button" name="topic" value="Business">Business</button>
+            <button type="submit" class="topic-button" name="topic" value="Health">Health</button>
+        </form>
+
+
+
     </div>
     <div class="right-side">
         <button id="log-button" class="login-button button-style"> Pieslēgties</button>

@@ -22,14 +22,15 @@ $(document).ready(function () {
         var password = $("input[name='password']").val();
 
   $(".login").submit(function (e) {
-      e.preventDefault();
+    e.preventDefault();
 
-      // Clear previous error messages
-      $(".error").text("");
+    // Clear previous error messages
+    $(".error").text("");
 
-      // Get form data
-      var username = $("input[name='username']").val();
-      var password = $("input[name='password']").val();
+    // Get form data
+    var username = $("input[name='username']").val();
+    var password = $("input[name='password']").val();
+
 
 
       // Prepare data to send
@@ -54,11 +55,16 @@ $(document).ready(function () {
               }
           },
       });
+
   });
 
   var selectedArticleId = null;
+  var titleInput = $('input[name="title"]');
+  var imageInput = $('input[name="image_url"]');
+  var authorInput = $('input[name="author"]');
+  var contentTextarea = $('textarea[name="content"]');
 
-  $(".admin-button").click(function () {
+$(".admin-button").click(function () {
     var buttonId = $(this).attr("id");
     console.log(buttonId);
 
@@ -71,33 +77,22 @@ $(document).ready(function () {
             // Handle the response from the server
             console.log(response);
 
-            // Populate the form with data
-            var titleInput = document.querySelector('input[name="title"]');
-            var imageInput = document.querySelector('input[name="image_url"]');
-            var authorInput = document.querySelector('input[name="author"]');
-            var contentTextarea = document.querySelector('textarea[name="content"]');
-
-            titleInput.value = response.title;
-            imageInput.value = response.image_url;
-            authorInput.value = response.author;
-            contentTextarea.value = response.content;
+            titleInput.val(response.title);
+            imageInput.val(response.image_url);
+            authorInput.val(response.author);
+            contentTextarea.val(response.content);
 
             // Store the selected article's ID
+            
             selectedArticleId = response.article_id;
-            if (!document.querySelector("#delete-article-button")) {
+            if (!$("#delete-article-button").length) {
                 // Create the "Dzēst" button
-                var deleteButton = document.createElement("button");
-                deleteButton.className = "edit-button button-style";
-                deleteButton.innerHTML = "Dzēst";
-                deleteButton.id = "delete-article-button"; // Set the button's ID
-                deleteButton.addEventListener("click", function () {
-                    // Implement the logic to delete the selected article
-                    // You can use AJAX to send the data to the server for deletion
-                });
+                var deleteButton = $("<button>").addClass("edit-button button-style").text("Dzēst").attr("id", "delete-article-button");
+                var newPostButton = $("<button>").addClass("edit-button button-style save-post").text("Saglabāt").attr("id", "edit-article-button");
+                var cancelPostButton = $("<button>").addClass("edit-button button-style cancel-post").text("Atcelt").attr("id", "cancel-article-button");
 
-                // Append the "Dzēst" button to the edit-bottom-container
-                var editBottomContainer = document.querySelector('.edit-bottom-container');
-                editBottomContainer.appendChild(deleteButton);
+                $(".edit-bottom-container").append(deleteButton, newPostButton, cancelPostButton);
+                $(".edit-bottom-container .edit-button:first").hide();
             }
         },
         error: function (error) {
@@ -106,9 +101,9 @@ $(document).ready(function () {
         }
     });
 });
-  // Event listener for the "Saglabāt" (Save) button
-  $(".edit-button.button-style").click(function (e) {
-    e.preventDefault();
+
+// Event listener for the "Saglabāt" (Save) button
+$(document).on("click", ".save-post", function () {
     if (selectedArticleId !== null) {
         var formData = {
             id: selectedArticleId,
@@ -120,10 +115,15 @@ $(document).ready(function () {
         console.log(formData);
     }
 });
-  
-  // Event listener for the "Dzēst" (Delete) button
-  $(document).on("click", "#delete-article-button", function () {
+
+// Event listener for the "Dzēst" (Delete) button
+$(document).on("click", "#delete-article-button", function () {
     if (selectedArticleId !== null) {
+      var data = {
+        id: selectedArticleId,
+        action: "delete"
+    };
+    
         $.ajax({
 
             method: "POST",
@@ -132,94 +132,125 @@ $(document).ready(function () {
             data: data,
 
             type: "POST",
+
             url: "libraries/libary.php",
             data: selectedArticleId,
 
+
             success: function (response) {
                 console.log(response);
-            }
+                // $(".edit-bottom-container .edit-button").show();
+                // $("#delete-article-button").remove();
+                // $("#edit-article-button").remove();
+                // $("#cancel-article-button").remove();
+                
+                // titleInput.val("");
+                // imageInput.val("");
+                // authorInput.val("");
+                // contentTextarea.val("");
+            },
+            error: function (error) {
+              // Handle any errors, if they occur
+              console.log("Error: " + JSON.stringify(error));
+            },
         });
     }
 });
 
-  
-$(".register").submit(function (e) {
-  e.preventDefault();
+$(document).on("click", ".cancel-post", function () {
+    if (selectedArticleId !== null) {
+        $(".edit-bottom-container .edit-button").show();
+        $("#delete-article-button").remove();
+        $("#edit-article-button").remove();
+        $("#cancel-article-button").remove();
+        
+        titleInput.val("");
+        imageInput.val("");
+        authorInput.val("");
+        contentTextarea.val("");
+    }
+});
 
-  // Clear previous error messages
-  $(".error").text("");
 
-  // Get form data
-  var username = $("input[name='username']").val();
-  var email = $("input[name='email']").val();
-  var password = $("input[name='password']").val();
+  $(".register").submit(function (e) {
+    e.preventDefault();
 
-  // Prepare data to send
-  var data = {
+    // Clear previous error messages
+    $(".error").text("");
+
+    // Get form data
+    var username = $("input[name='username']").val();
+    var email = $("input[name='email']").val();
+    var password = $("input[name='password']").val();
+
+    // Prepare data to send
+    var data = {
       action: "signup",
       username: username,
       email: email,
       password: password
-  };
+    };
 
-  // Send data to the backend using AJAX
-  $.ajax({
+    // Send data to the backend using AJAX
+    $.ajax({
       type: "POST",
       url: "libraries/authentication.php", // Replace with your backend script URL
       data: data,
       success: function (response) {
-          console.log(response);
-          if (response.error) {
-              if (response.errUser) {
-                  $(".errUser").text(response.errUser);
-              }
-              if (response.errPass) {
-                  $(".errPass").text(response.errPass);
-              }
-              if (response.errVeri) {
-                  $(".errVeri").text(response.errVeri);
-              }
+        console.log(response);
+        if (response.error) {
+          if (response.errUser) {
+            $(".errUser").text(response.errUser);
           }
+          if (response.errPass) {
+            $(".errPass").text(response.errPass);
+          }
+          if (response.errVeri) {
+            $(".errVeri").text(response.errVeri);
+          }
+        }
       }
-  });
-});
-
-
-
-    $(".admin-button").click(function () {
-        var buttonId = $(this).attr("id");
-        alert(buttonId);
-        $.ajax({
-            url: "libraries/admin.php", // Specify the URL of your backend script
-            type: "POST",
-            data: { buttonId: buttonId }, // Send the button's id as POST data
-            success: function (response) {
-                // Handle the response from the server, if needed
-                console.log(response);
-            },
-            error: function (error) {
-                // Handle any errors, if they occur
-                console.log("Error: " + JSON.stringify(error));
-            },
-        });
     });
+  });
 
 
-    $(".register").submit(function (e) {
-        e.preventDefault();
+
+  $(".admin-button").click(function () {
+    var buttonId = $(this).attr("id");
+    $.ajax({
+      url: "libraries/admin.php", // Specify the URL of your backend script
+      type: "POST",
+      data: { buttonId: buttonId }, // Send the button's id as POST data
+      success: function (response) {
+        // Handle the response from the server, if needed
+        console.log(response);
+      },
+      error: function (error) {
+        // Handle any errors, if they occur
+        console.log("Error: " + JSON.stringify(error));
+      },
+    });
+  });
+
+
+  $(".register").submit(function (e) {
+    e.preventDefault();
+
 
         // Get form data
         var username = $("input[name='username']").val();
         var email = $("input[name='email']").val();
         var password = $("input[name='password']").val();
 
-        // Prepare data to send
-        var data = {
-            action: "signup",
-            username: username,
-            email: email,
-            password: password,
-        };
+
+    // Prepare data to send
+    var data = {
+      action: "signup",
+      username: username,
+      email: email,
+      password: password,
+    };
+
 
         // Send data to the backend using AJAX
         $.ajax({
@@ -246,6 +277,12 @@ $(".register").submit(function (e) {
             },
         });
     });
+  });
+
+
+  $(".admin-button").click(function () {
+    var editForm = document.getElementById("edit-form");
+  });
 
     $(".logoff-button").click(function (e) {
         e.preventDefault();
@@ -272,10 +309,11 @@ $(".register").submit(function (e) {
             },
         });
     });
+
 });
 
 $(".login-button").click(function () {
-    window.location.href = "login.php";
+  window.location.href = "login.php";
 });
 
 function comment(post, user, date){
