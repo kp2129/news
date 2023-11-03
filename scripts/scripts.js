@@ -1,4 +1,26 @@
 $(document).ready(function () {
+
+    $.get("libraries/session_status.php", function (data) {
+        if (data === "active") {
+            // Change the button's class name if the session is active
+            button = document.getElementById("log-button");
+            button.className = "logoff-button";
+            button.innerText = "New Button Text";
+        } else {
+            // Change the button's class name if the session is inactive
+            button = document.getElementById("log-button");
+            button.className = "log-button";
+            button.innerText = "New Button Text";
+        }
+    });
+
+    $(".login").submit(function (e) {
+        e.preventDefault();
+
+        // Get form data
+        var username = $("input[name='username']").val();
+        var password = $("input[name='password']").val();
+
   $(".login").submit(function (e) {
     e.preventDefault();
 
@@ -9,28 +31,31 @@ $(document).ready(function () {
     var username = $("input[name='username']").val();
     var password = $("input[name='password']").val();
 
-    // Prepare data to send
-    var data = {
-      action: "login",
-      username: username,
-      password: password,
-    };
 
-    // Send data to the backend using AJAX
-    $.ajax({
-      method: "POST", // Use the appropriate HTTP method
-      dataType: "json", // Expect JSON response
-      url: "libraries/authentication.php", // Replace with your backend script URL
-      data: data,
-      success: function (response) {
-        console.log(response);
-        if (response.error) {
-          $(".err").text(response.error).css("color", "red");
-        } else if (response.success) {
-          window.location.href = "index.php";
-        }
-      },
-    });
+
+      // Prepare data to send
+      var data = {
+          action: "login",
+          username: username,
+          password: password,
+      };
+
+      // Send data to the backend using AJAX
+      $.ajax({
+          method: "POST", // Use the appropriate HTTP method
+          dataType: "json", // Expect JSON response
+          url: "libraries/authentication.php", // Replace with your backend script URL
+          data: data,
+          success: function (response) {
+              console.log(response);
+              if (response.error) {
+                  $(".err").text(response.error).css("color", "red");
+              } else if (response.success) {
+                  window.location.href = "index.php";
+              }
+          },
+      });
+
   });
 
   var selectedArticleId = null;
@@ -100,9 +125,18 @@ $(document).on("click", "#delete-article-button", function () {
     };
     
         $.ajax({
-            type: "POST",
-            url: "libraries/admin.php",
+
+            method: "POST",
+            dataType: "json",
+            url: "libraries/authentication.php",
             data: data,
+
+            type: "POST",
+
+            url: "libraries/libary.php",
+            data: selectedArticleId,
+
+
             success: function (response) {
                 console.log(response);
                 // $(".edit-bottom-container .edit-button").show();
@@ -202,13 +236,12 @@ $(document).on("click", ".cancel-post", function () {
   $(".register").submit(function (e) {
     e.preventDefault();
 
-    // Clear previous error messages
-    $(".error").text("");
 
-    // Get form data
-    var username = $("input[name='username']").val();
-    var email = $("input[name='email']").val();
-    var password = $("input[name='password']").val();
+        // Get form data
+        var username = $("input[name='username']").val();
+        var email = $("input[name='email']").val();
+        var password = $("input[name='password']").val();
+
 
     // Prepare data to send
     var data = {
@@ -218,26 +251,99 @@ $(document).on("click", ".cancel-post", function () {
       password: password,
     };
 
-    // Send data to the backend using AJAX
-    $.ajax({
-      method: "POST", // Use the appropriate HTTP method
-      dataType: "json", // Expect JSON response
-      url: "libraries/authentication.php", // Replace with your backend script URL
-      data: data,
-      success: function (response) {
-        console.log(response);
-        if (response["error"]) {
-          $(".err").text(response["error"]).css("color", "red");
-        }
-      },
+
+        // Send data to the backend using AJAX
+        $.ajax({
+            method: "POST",
+            dataType: "json",
+            url: "libraries/authentication.php",
+            data: data,
+            success: function (response) {
+                console.log("success");
+                if (response["error"]) {
+                    $(".err").text(response["error"]).css("color", "red");
+                } else if (response.success) {
+                    window.location.href = "login.php";
+                }
+            },
+            error: function (response) {
+                console.log("error");
+                console.log(responsea);
+                if (response["error"]) {
+                    $(".err").text(response["error"]).css("color", "red");
+                } else if (response.success) {
+                    window.location.href = "login.php";
+                }
+            },
+        });
     });
   });
+
 
   $(".admin-button").click(function () {
     var editForm = document.getElementById("edit-form");
   });
+
+    $(".logoff-button").click(function (e) {
+        e.preventDefault();
+
+        // Prepare data to send
+        var data = {
+            action: "logoff",
+        };
+
+        // Send data to the backend using AJAX
+        $.ajax({
+            method: "POST",
+            dataType: "json",
+            url: "libraries/authentication.php",
+            data: data,
+            success: function (response) {
+                console.log("success");
+                console.log(response);
+                location.reload(true);
+            },
+            error: function (response) {
+                console.log("error");
+                console.log(response);
+            },
+        });
+    });
+
 });
 
 $(".login-button").click(function () {
   window.location.href = "login.php";
 });
+
+function comment(post, user, date){
+  let contest = $('#contest').val();
+  let form = $('#comment-entry-container');
+
+  $.ajax({
+      url: "../libraries/comment.php",
+      type: "POST",
+      dataType: "json",
+      data: {constest: contest, post: post},
+      success: function(result){
+          console.log(result);
+          if(result.msg == ''){
+            $('#errContest').text(result.errContest);
+            $('#msg').text('');
+          }else{
+            $('#errContest').text('');
+            $('#msg').text(result.msg);
+            form.append(`
+            <div class="comment-head">
+              <p class="comment-author">`+user+`</p>
+              <p class="comment-date">`+date+`</p>
+            </div>
+              <p class="comment-content">`+contest+`</p>
+          `);
+          }
+      },
+      error: function(error){
+          console.log(error.responseText);
+      }
+  });
+}

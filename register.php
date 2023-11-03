@@ -34,7 +34,7 @@ include_once('components/navbar.php')
             </div>
             <div class="input">
                 <p>Epasts</p>
-                <input type="text" name="email">
+                <input type="email" name="email">
             </div>
             <div class="submit">
                 <button>Pieslēgties</button>

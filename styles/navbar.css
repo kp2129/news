@@ -71,6 +71,8 @@ button {
 
 .topic-button {
     font-weight: 500;
+    text-decoration: none;
+    color: black;
 }
 
 /* right side */
