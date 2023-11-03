@@ -62,7 +62,7 @@
 .edit-container {
     background-color: var(--bg-other);
     border-radius: 15px;
-    height: 100%;
+    /* height: 100%; */
     padding: 0rem 2rem;
 
     display: flex;
@@ -76,8 +76,10 @@
 }
 
 .edit-bottom-container {
-    /* display: none; */
     width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
     text-align: center;
 }
 

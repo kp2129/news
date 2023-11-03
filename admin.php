@@ -74,8 +74,8 @@ $categories = $conn->select("SELECT * FROM categories");
                         </div>
                 </div>
                 <div class="edit-bottom-container">
-                    <button class="edit-button button-style">Saglabāt</button>
-                    
+                    <button class="edit-button button-style add-post">Pievienot jaunu</button>
+
                 </div>
                 </form>
             </div>
