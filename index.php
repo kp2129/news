@@ -7,7 +7,7 @@ $db = new Database;
 
 if (isset($_GET['topic'])) {
     $topic = $_GET['topic'];
-    //mazāk svarīgas ziņas, tiek izvadītas pēc top 2 ziņām
+
     $allNews = $db->select("SELECT na.*, ai.image_url
         FROM news_articles na
         INNER JOIN article_images ai ON na.article_id = ai.article_id
@@ -25,7 +25,7 @@ if (isset($_GET['topic'])) {
         LIMIT 2;
     ");
 } else {
-    // If there is no 'topic' in GET, then display the top 2 news articles from the current date
+    
     $top2News = $db->select("SELECT na.*, ai.image_url
         FROM news_articles na
         INNER JOIN article_images ai ON na.article_id = ai.article_id
@@ -84,7 +84,7 @@ print_r($top2News);
 
         </div>
         <!-- mazais variants (pārējiem) -->
-
+        <!-- foreach loops priekš $allNews -->
         <div class="bottom-container">
             <a href="#" class="m-post-container">
                 <img class="m-post-image" src="https://ichef.bbci.co.uk/news/976/cpsprodpb/EF66/production/_98268216_gettyimages-826469180-1.jpg.webp" alt="">
