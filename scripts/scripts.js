@@ -1,18 +1,129 @@
 $(document).ready(function () {
 
-    $.get("libraries/session_status.php", function (data) {
-        if (data === "active") {
-            // Change the button's class name if the session is active
-            button = document.getElementById("log-button");
-            button.className = "logoff-button";
-            button.innerText = "New Button Text";
-        } else {
-            // Change the button's class name if the session is inactive
-            button = document.getElementById("log-button");
-            button.className = "log-button";
-            button.innerText = "New Button Text";
-        }
-    });
+  var selectedArticleId = null;
+  var titleInput = $('input[name="title"]');
+  var imageInput = $('input[name="image_url"]');
+  var authorInput = $('input[name="author"]');
+  var contentTextarea = $('textarea[name="content"]');
+
+  $(".edit-post-button ").click(function() {
+      var buttonId = $(this).attr("id");
+      console.log(buttonId);
+
+      $.ajax({
+          url: "libraries/admin.php",
+          type: "POST",
+          data: {
+              buttonId: buttonId
+          },
+          dataType: "json",
+          success: function(response) {
+              // Handle the response from the server
+              console.log(response);
+
+              titleInput.val(response.title);
+              imageInput.val(response.image_url);
+              authorInput.val(response.author);
+              contentTextarea.val(response.content);
+
+              // Store the selected article's ID
+
+              selectedArticleId = response.article_id;
+              if (!$("#delete-article-button").length) {
+                  // Create the "Dzēst" button
+                  var deleteButton = $("<button>").addClass("edit-button button-style").text("Dzēst").attr("id", "delete-article-button");
+                  var newPostButton = $("<button>").addClass("edit-button button-style save-post").text("Saglabāt").attr("id", "edit-article-button");
+                  var cancelPostButton = $("<button>").addClass("edit-button button-style cancel-post").text("Atcelt").attr("id", "cancel-article-button");
+
+                  $(".edit-bottom-container").append(deleteButton, newPostButton, cancelPostButton);
+                  $(".edit-bottom-container .edit-button:first").hide();
+              }
+          },
+          error: function(error) {
+              // Handle any errors, if they occur
+              console.log("Error: " + JSON.stringify(error));
+          }
+      });
+  });
+
+
+  // Event listener for the "Saglabāt" (Save) button
+$(document).on("click", ".save-post", function () {
+  if (selectedArticleId !== null) {
+      var formData = {
+          id: selectedArticleId,
+          title: $('input[name="title"]').val(),
+          image_url: $('input[name="image_url"]').val(),
+          author: $('input[name="author"]').val(),
+          content: $('textarea[name="content"]').val()
+      };
+      console.log(formData);
+  }
+});
+
+// Event listener for the "Dzēst" (Delete) button
+$(document).on("click", "#delete-article-button", function () {
+  if (selectedArticleId !== null) {
+    var data = {
+      id: selectedArticleId,
+      action: "delete"
+  };
+  
+      $.ajax({
+
+          method: "POST",
+          dataType: "json",
+          url: "libraries/admin.php",
+          data: data,
+
+          success: function (response) {
+              console.log(response);
+              // $(".edit-bottom-container .edit-button").show();
+              // $("#delete-article-button").remove();
+              // $("#edit-article-button").remove();
+              // $("#cancel-article-button").remove();
+              
+              // titleInput.val("");
+              // imageInput.val("");
+              // authorInput.val("");
+              // contentTextarea.val("");
+          },
+          error: function (error) {
+            // Handle any errors, if they occur
+            console.log("Error: " + JSON.stringify(error));
+          },
+      });
+  }
+});
+
+$(document).on("click", ".cancel-post", function () {
+  if (selectedArticleId !== null) {
+      $(".edit-bottom-container .edit-button").show();
+      $("#delete-article-button").remove();
+      $("#edit-article-button").remove();
+      $("#cancel-article-button").remove();
+      
+      titleInput.val("");
+      imageInput.val("");
+      authorInput.val("");
+      contentTextarea.val("");
+  }
+});
+
+
+    // $.get("libraries/session_status.php", function (data) {
+    //     if (data === "active") {
+    //         // Change the button's class name if the session is active
+    //         button = document.getElementById("log-button");
+    //         button.className = "logoff-button";
+    //         button.innerText = "New Button Text";
+    //     } else {
+    //         // Change the button's class name if the session is inactive
+    //         button = document.getElementById("log-button");
+    //         button.className = "log-button";
+    //         button.innerText = "New Button Text";
+    //     }
+    // });
 
     $(".login").submit(function (e) {
         e.preventDefault();
@@ -58,118 +169,8 @@ $(document).ready(function () {
 
   });
 
-  var selectedArticleId = null;
-  var titleInput = $('input[name="title"]');
-  var imageInput = $('input[name="image_url"]');
-  var authorInput = $('input[name="author"]');
-  var contentTextarea = $('textarea[name="content"]');
+ 
 
-$(".admin-button").click(function () {
-    var buttonId = $(this).attr("id");
-    console.log(buttonId);
-
-    $.ajax({
-        url: "libraries/admin.php",
-        type: "POST",
-        data: { buttonId: buttonId },
-        dataType: "json",
-        success: function (response) {
-            // Handle the response from the server
-            console.log(response);
-
-            titleInput.val(response.title);
-            imageInput.val(response.image_url);
-            authorInput.val(response.author);
-            contentTextarea.val(response.content);
-
-            // Store the selected article's ID
-            
-            selectedArticleId = response.article_id;
-            if (!$("#delete-article-button").length) {
-                // Create the "Dzēst" button
-                var deleteButton = $("<button>").addClass("edit-button button-style").text("Dzēst").attr("id", "delete-article-button");
-                var newPostButton = $("<button>").addClass("edit-button button-style save-post").text("Saglabāt").attr("id", "edit-article-button");
-                var cancelPostButton = $("<button>").addClass("edit-button button-style cancel-post").text("Atcelt").attr("id", "cancel-article-button");
-
-                $(".edit-bottom-container").append(deleteButton, newPostButton, cancelPostButton);
-                $(".edit-bottom-container .edit-button:first").hide();
-            }
-        },
-        error: function (error) {
-            // Handle any errors, if they occur
-            console.log("Error: " + JSON.stringify(error));
-        }
-    });
-});
-
-// Event listener for the "Saglabāt" (Save) button
-$(document).on("click", ".save-post", function () {
-    if (selectedArticleId !== null) {
-        var formData = {
-            id: selectedArticleId,
-            title: $('input[name="title"]').val(),
-            image_url: $('input[name="image_url"]').val(),
-            author: $('input[name="author"]').val(),
-            content: $('textarea[name="content"]').val()
-        };
-        console.log(formData);
-    }
-});
-
-// Event listener for the "Dzēst" (Delete) button
-$(document).on("click", "#delete-article-button", function () {
-    if (selectedArticleId !== null) {
-      var data = {
-        id: selectedArticleId,
-        action: "delete"
-    };
-    
-        $.ajax({
-
-            method: "POST",
-            dataType: "json",
-            url: "libraries/authentication.php",
-            data: data,
-
-            type: "POST",
-
-            url: "libraries/libary.php",
-            data: selectedArticleId,
-
-
-            success: function (response) {
-                console.log(response);
-                // $(".edit-bottom-container .edit-button").show();
-                // $("#delete-article-button").remove();
-                // $("#edit-article-button").remove();
-                // $("#cancel-article-button").remove();
-                
-                // titleInput.val("");
-                // imageInput.val("");
-                // authorInput.val("");
-                // contentTextarea.val("");
-            },
-            error: function (error) {
-              // Handle any errors, if they occur
-              console.log("Error: " + JSON.stringify(error));
-            },
-        });
-    }
-});
-
-$(document).on("click", ".cancel-post", function () {
-    if (selectedArticleId !== null) {
-        $(".edit-bottom-container .edit-button").show();
-        $("#delete-article-button").remove();
-        $("#edit-article-button").remove();
-        $("#cancel-article-button").remove();
-        
-        titleInput.val("");
-        imageInput.val("");
-        authorInput.val("");
-        contentTextarea.val("");
-    }
-});
 
 
   $(".register").submit(function (e) {
@@ -280,9 +281,9 @@ $(document).on("click", ".cancel-post", function () {
   });
 
 
-  $(".admin-button").click(function () {
-    var editForm = document.getElementById("edit-form");
-  });
+  // $(".admin-button").click(function () {
+  //   var editForm = document.getElementById("edit-form");
+  // });
 
     $(".logoff-button").click(function (e) {
         e.preventDefault();
@@ -315,6 +316,11 @@ $(document).on("click", ".cancel-post", function () {
 $(".login-button").click(function () {
   window.location.href = "login.php";
 });
+
+// $(".admin-button").click(function () {
+//   window.location.href = "admin.php";
+// });
+
 
 function comment(post, user, date){
   let contest = $('#contest').val();
