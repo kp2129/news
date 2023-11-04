@@ -26,23 +26,22 @@ if (isset($_GET['topic'])) {
         LIMIT 2; 
     ");
 } else {
-    
+
     $top2News = $db->select("SELECT na.*, ai.image_url
         FROM news_articles na
         INNER JOIN article_images ai ON na.article_id = ai.article_id
-        WHERE na.published_date = CURDATE()
+        INNER JOIN categories c ON na.category_id = c.category_id
         ORDER BY na.views DESC
-        LIMIT 2;
+        LIMIT 2; 
     ");
 
     $allNews = $db->select("SELECT na.*, ai.image_url
     FROM news_articles na
-    INNER JOIN article_images ai ON na.article_id = ai.article_id
-    WHERE na.published_date = CURDATE()
-    ORDER BY na.views DESC
-    LIMIT 100 OFFSET 2;
+        INNER JOIN article_images ai ON na.article_id = ai.article_id
+        INNER JOIN categories c ON na.category_id = c.category_id
+        ORDER BY na.views DESC
+        LIMIT 100 OFFSET 2;
 ");
-
 }
 print_r($allNews);
 
