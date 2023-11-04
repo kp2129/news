@@ -15,6 +15,15 @@
 
     </div>
     <div class="right-side">
+        <?php
+        session_start();
+        if(isset($_SESSION['UId'])){
+            if($_SESSION['role'] == 1){
+                echo '<button id="log-button" class="admin-button button-style">Admin Panel</button>';
+
+            }
+        }
+        ?>
         <button id="log-button" class="login-button button-style"> Pieslēgties</button>
         <button class="filter-button s-button-style">
             <img src="svg/filter.svg" alt="filter">

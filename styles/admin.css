@@ -42,7 +42,7 @@
     align-items: end;
 }
 
-.admin-button {
+.admin-button, .edit-post-button {
     margin: 0.5rem 0rem 0.5rem 0.5rem;
 }
 
