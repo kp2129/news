@@ -75,7 +75,7 @@ print_r($top2News);
         <div class="top-container">
             <?php foreach ($top2News as $topNews) : ?>
                 <a href="post.php?id=<?php echo $topNews[0]; ?>" class="l-post-container">
-                    <img class="l-post-image" src="<?= $topNews[8] ?>" alt="">
+                    <img class="l-post-image" src="<?= $topNews[7] ?>" alt="">
                     <p class="l-post-title"><?= $topNews[1] ?></p>
                     <div class="l-post-like-count button-style">
                         <p>12K</p>
@@ -90,7 +90,7 @@ print_r($top2News);
         <div class="bottom-container">
             <?php foreach($allNews as $news) : ?>
                 <a href="post.php?id=<?php  echo $news[0]; ?>" class="m-post-container">
-                    <img class="m-post-image" src="<?php echo $news[8]; ?>" alt="">
+                    <img class="m-post-image" src="<?php echo $news[7]; ?>" alt="">
                     <p class="m-post-title"><?php  echo $news[1]; ?></p>
                 </a>
             <?php endforeach; ?>
