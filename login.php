@@ -1,38 +1,56 @@
+<?php
+include_once('components/navbar.php');
+include_once('libraries/db.php');
+
+if (isset($_SESSION)) {
+    if (isset($_SESSION['UId'])) {
+        header("Location: index.php");
+        exit; // Important: After a redirect, exit the script to prevent further execution
+    }
+}
+
+
+print_r($_SESSION)
+
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet"  href="style.css">
+
     <link rel="stylesheet" href="styles/navbar.css">
-    <link rel="stylesheet" href="styles/index.css">
-    
+    <link rel="stylesheet" href="styles/login.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="scripts/scripts.js"></script>
+
     <title>Login</title>
 </head>
+
+
+
 <body>
+    <form method="POST" class="cont login">
+        <div class="border">
+            <div class="login-title">
+                Pieslēgties
+            </div>
+            <p class="err">MAn</p>
+            <div class="input">
+                <p>Lietotājvārds</p>
+                <input type="text" name="username">
+            </div>
+            <div class="input">
+                <p>Parole</p>
+                <input type="text" name="password">
+            </div>
+            <div class="submit">
+                <button>Pieslēgties</button>
+            </div>
+            <a href="register.php" class="switch-login">neesi lietotājs?</a>
+        </div>
+    </form>
+</body>
 
-<header></header>
-    <div class="container">
-        <h1>Login</h1>
-        <form action="process_file.php" method="post">
-            <div class="form-group">
-                <input type="text" id="username" name="username" placeholder="Email adress" required>
-            </div>
-            <div class="form-group">
-                <input type="password" id="password" name="password" placeholder="Password" required>
-            </div>
-            <div class="form-group" style="justify-content: flex-start;">
-                <input type="checkbox" name="remember" id="remember">
-                <label style="margin: 10px;" for="remember">Remember me</label>
-            </div>
-            <input type="submit" value="Pieslēgties">
-            <div class="form-group">
-                <p>Don't have an account? <a href="#">Sign Up here!</a></p>
-            </div>
-        </form>
-    </div>
-
-    </body>
 </html>

@@ -1,7 +1,5 @@
 <?php
-<<<<<<< Updated upstream
-include_once('components/navbar.php')
-=======
+
 include_once('components/navbar.php');
 include_once('libraries/db.php');
 $db = new Database;
@@ -39,6 +37,7 @@ if (isset($_GET['topic'])) {
     ");
 
     $allNews = $db->select("SELECT na.*, ai.image_url
+
         FROM news_articles na
         INNER JOIN article_images ai ON na.article_id = ai.article_id
         INNER JOIN categories c ON na.category_id = c.category_id
@@ -49,9 +48,6 @@ if (isset($_GET['topic'])) {
 print_r($allNews);
 
 print_r($top2News);
-
-
->>>>>>> Stashed changes
 
 ?>
 
@@ -65,38 +61,32 @@ print_r($top2News);
     <script src="scripts/scripts.js"></script>
     <link rel="stylesheet" href="styles/navbar.css">
     <link rel="stylesheet" href="styles/index.css">
-    <title>Document</title>
+    <title>NEWS</title>
 </head>
 
 <body>
-<<<<<<< Updated upstream
-=======
+
     <?php print_r($_SESSION) ?>
->>>>>>> Stashed changes
+
     <!-- saņem no DB visus ierakstus. pirmie 2 ir lielie, pārējie ir mazie varianti -->
     <!-- skatīt pēc figma stila -->
     <div class="container">
         <!-- lielais variants (pirmajiem 2 ierakstiem)-->
         <div class="top-container">
-            <a href="post.php?id=0" class="l-post-container">
-                <img class="l-post-image" src="https://ichef.bbci.co.uk/news/976/cpsprodpb/EF66/production/_98268216_gettyimages-826469180-1.jpg.webp" alt="">
-                <p class="l-post-title">LOL JK, Putins izsaka. Mediji pārsteigti par viņu angļu valodas un interneta kultūras izpratni</p>
-                <div class="l-post-like-count button-style">
-                    <p>12K</p>
-                    <i class="bi bi-hand-thumbs-up-fill"></i>
-                </div>
-            </a>
+            <?php foreach ($top2News as $topNews) : ?>
+                <a href="post.php?id=<?php echo $topNews[0]; ?>" class="l-post-container">
+                    <img class="l-post-image" src="<?= $topNews[8] ?>" alt="">
+                    <p class="l-post-title"><?= $topNews[1] ?></p>
+                    <div class="l-post-like-count button-style">
+                        <p>12K</p>
+                        <i class="bi bi-hand-thumbs-up-fill"></i>
+                    </div>
+                </a>
+            <?php endforeach; ?>
 
-            <a href="post.php?id=0" class="l-post-container">
-                <img class="l-post-image" src="https://ichef.bbci.co.uk/news/976/cpsprodpb/EF66/production/_98268216_gettyimages-826469180-1.jpg.webp" alt="">
-                <div class="l-post-like-count button-style">
-                    <p>139K</p>
-                    <i class="bi bi-hand-thumbs-up-fill"></i>
-                </div>
-                <p class="l-post-title">LOL JK, Putins izsaka. Mediji pārsteigti par viņu angļu valodas un interneta kultūras izpratni</p>
-            </a>
         </div>
         <!-- mazais variants (pārējiem) -->
+        <!-- foreach loops priekš $allNews -->
         <div class="bottom-container">
             <?php foreach($allNews as $news) : ?>
                 <a href="post.php?id=<?php  echo $news[0]; ?>" class="m-post-container">

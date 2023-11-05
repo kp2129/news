@@ -1,0 +1,54 @@
+.cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0rem 5rem;
+}
+.border {
+    background-color: #d9d9d9;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+    width: 20rem;
+}
+.input {
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+.input input {
+    height: 1.5rem;
+    width: 100%;
+    border-radius: 15px;
+    border: none;
+    background-color: #bfbfbf;
+}
+p {
+    margin: 0;
+}
+.login-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+}
+.submit {
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.submit button {
+    background-color: #bfbfbf;
+    border-radius: 15px;
+    padding: 0.7rem 1.2rem;
+    font-weight: bold;
+}
+
+.switch-login {
+    color: black;
+}
+
+.err {
+    color: transparent;
+}
