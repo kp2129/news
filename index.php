@@ -45,9 +45,9 @@ if (isset($_GET['topic'])) {
         LIMIT 100 OFFSET 2;
 ");
 }
-print_r($allNews);
+// print_r($allNews);
 
-print_r($top2News);
+// print_r($top2News);
 
 ?>
 
@@ -66,7 +66,7 @@ print_r($top2News);
 
 <body>
 
-    <?php print_r($_SESSION) ?>
+    <!-- <?php print_r($_SESSION) ?> -->
 
     <!-- saņem no DB visus ierakstus. pirmie 2 ir lielie, pārējie ir mazie varianti -->
     <!-- skatīt pēc figma stila -->

@@ -19,7 +19,7 @@ $comment = $data1['data'];
 // echo var_dump($single);
 // echo '</pre>';
 print_r($single[0]);
-if(!empty($single[0][9])){
+if(!empty($single[0][8])){
     $img = json_decode($single[0][8]);
 }
 
@@ -64,7 +64,7 @@ $count = count($data1);
             <p class="post-title"><?= $single[0][1] ?></p>
 
             <div class="post-details-container">
-                <p class="post-details"><?= $single[0][7] ?> • <?= $single[0][3] ?> • <?= $single[0][8] ?></p>
+                <p class="post-details"><?= $single[0][6] ?> • <?= $single[0][3] ?> • <?= $single[0][5] ?></p>
                 <i class="bi bi-hand-thumbs-up-fill"></i>
             </div>
 
