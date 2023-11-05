@@ -58,15 +58,14 @@ $categories = $conn->select("SELECT * FROM categories");
                         <div class="input-container">
                             <p>Virsraksts</p>
                             <input type="text" name="title">
+                            <p id='err_title'></p>
                         </div>
                         <div class="input-container">
                             <p>Bilde</p>
                             <input type="text" name="image_url">
+                            <p id='err_img'></p>
                         </div>
-                        <!-- <div class="input-container">
-                            <p>Autors</p>
-                            <input type="text" name="author">
-                        </div> -->
+
                         <div class="input-container">
                             <p>Kategorija</p>
                             <select name="kategorija">
@@ -80,7 +79,7 @@ $categories = $conn->select("SELECT * FROM categories");
                         <div class="input-container">
                             <p>Saturs</p>
                             <textarea name="content" class='input-textarea' name="" id="" cols="30" rows="13"></textarea>
-
+                            <p id='err_content'></p>
                         </div>
                 </div>
                 <div class="edit-bottom-container">

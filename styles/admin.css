@@ -126,3 +126,7 @@
     padding: 0.25rem 1rem;
     margin-bottom: 1.5rem;
 }
+
+#err_content, #err_img , #err_title{
+    color: red;
+}
