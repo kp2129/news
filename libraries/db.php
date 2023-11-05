@@ -90,7 +90,6 @@ class Database
         a.title,
         a.content,
         a.published_date,
-        a.source,
         a.views,
         c.category_name AS category,
         u.username AS author,
@@ -150,7 +149,6 @@ class Database
         na.content,
         na.author_id,
         na.published_date,
-        na.source,
         na.views,
         c.category_name,
         ai.image_url

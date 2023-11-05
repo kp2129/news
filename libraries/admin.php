@@ -4,9 +4,24 @@ require_once("db.php");
 $conn = new Database();
 session_start();
 
+// libraries/admin.php
+
+// Check if the request method is DELETE
 if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-    handleDeleteRequest($conn);
-} elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $data = json_decode(file_get_contents("php://input"));
+    
+    if ($data !== null && isset($data->id)) {
+        $id = $data->id;
+        $success = handleDeleteRequest($conn, $id);
+
+    
+    } else {
+        $errors['id'] = "Missing id";
+        echo json_encode(false); // Handle the error as needed
+    }
+}
+
+ elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['action'])) {
         handlePostRequest($conn);
     } elseif (isset($_POST['buttonId'])) {
@@ -18,30 +33,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
 
 die();
 
-function handleDeleteRequest($conn) {
-    if (isset($_POST['id'])) {
-        $id = $_POST['id'];
+function handleDeleteRequest($conn, $id) {
+
         $result = $conn->delete("DELETE FROM news_articles WHERE article_id = $id");
         echo json_encode($result);
-    }
+    
 }
 
 function validateInput($title, $content, $image_url, $category) {
     $errors = [];
 
     if (empty($title)) {
-        $errors[] = "Title is required.";
+        $errors['title'] = "Title is required.";
     }
 
     if (empty($content)) {
-        $errors[] = "Content is required.";
+        $errors['content'] = "Content is required.";
     }
 
     if (empty($image_url)) {
-        $errors[] = "Image URL is required.";
+        $errors['image_url'] = "Image URL is required.";
+    } else {
+        if (!filter_var($image_url, FILTER_VALIDATE_URL)) {
+            $errors['image_url'] = "Image URL is not a valid URL.";
+        } else {
+            $image_info = @getimagesize($image_url);
+            if (!$image_info) {
+                $errors['image_url'] = "Image URL is not a valid image.";
+            }
+        }
     }
 
-    // You can add more specific validation checks here, e.g., for category.
 
     return $errors;
 }
