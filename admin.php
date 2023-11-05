@@ -5,17 +5,15 @@ include_once('libraries/db.php');
 $conn = new Database;
 $categories = $conn->select("SELECT * FROM categories");
 
-if (isset($_SESSION['role'])) {
-    if ($_SESSION['role'] != 1) {
-        header("Location: index.php");
-        exit;
-    }
-    header("Location: index.php");
-    exit;
-}else{
-    header("Location: index.php");
-    exit;
-}
+// if (isset($_SESSION['role'])) {
+//     if ($_SESSION['role'] != 1) {
+//         header("Location: index.php");
+//         exit;
+//     }
+// }else{
+//     header("Location: index.php");
+//     exit;
+// }
 
 
 // IZVEIDOT CHECK VAI IR ADMINS VAI NAV LIETOJOT role_id no user tabulas
@@ -65,10 +63,10 @@ if (isset($_SESSION['role'])) {
                             <p>Bilde</p>
                             <input type="text" name="image_url">
                         </div>
-                        <div class="input-container">
+                        <!-- <div class="input-container">
                             <p>Autors</p>
                             <input type="text" name="author">
-                        </div>
+                        </div> -->
                         <div class="input-container">
                             <p>Kategorija</p>
                             <select name="kategorija">
@@ -86,7 +84,7 @@ if (isset($_SESSION['role'])) {
                         </div>
                 </div>
                 <div class="edit-bottom-container">
-                    <button class="edit-button button-style add-post">Pievienot jaunu</button>
+                    <button id='new-post-button' class="edit-button button-style add-post">Pievienot jaunu</button>
 
                 </div>
                 </form>

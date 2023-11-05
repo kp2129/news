@@ -117,7 +117,7 @@
     resize: none;
 }
 
-.edit-button {
+.edit-button , .new-post-button {
     background-color: var(--bg-other-darker);
     font-weight: bold;
     font-size: 1.1rem;
