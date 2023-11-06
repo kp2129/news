@@ -60,6 +60,7 @@ $(document).ready(function () {
         title: $('input[name="title"]').val(),
         image_url: $('input[name="image_url"]').val(),
         content: $('textarea[name="content"]').val(),
+        category: category.val(),
         action: "save",
       };
 
@@ -70,7 +71,7 @@ $(document).ready(function () {
         data: formData,
         success: function (response) {
           console.log(response);
-          if (response.message == "Update successful") {
+          if (response == true) {
             location.reload();
           }
         },
