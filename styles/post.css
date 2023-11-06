@@ -153,3 +153,6 @@ p {
     border-radius: 15px;
     width: 100%;
 }
+#like{
+    cursor: pointer;
+}

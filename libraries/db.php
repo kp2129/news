@@ -161,11 +161,17 @@ class Database
         return ($data);
     }
 
+    public function ifliked($id, $uid){
+        $obj = new Database();
+
+        $data = $obj->select("SELECT `like_id` FROM `article_likes` WHERE `article_id` = $id AND `user_id` = $uid");
+        return ($data);
+    }
+
     public function GetPostByID($id)
     {
         $posts = $this->select("SELECT * from news_articles WHERE article_id = $id");
         $images = $this->select("SELECT image_url from article_images WHERE article_id = $id");
         return array("posts" => $posts, "images" => $images);
     }
-
 }
