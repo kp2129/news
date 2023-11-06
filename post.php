@@ -18,12 +18,13 @@ $comment = $data1['data'];
 // echo '<pre>';
 // echo var_dump($single);
 // echo '</pre>';
-print_r($single[0]);
+// print_r($single[0]);
 if(!empty($single[0][8])){
     $img = json_decode($single[0][8]);
 }
 
 $data1 = $database->suggestion($single[0][6]);
+print_r($data1);
 $count = count($data1);
 ?>
 
