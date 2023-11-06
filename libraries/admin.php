@@ -73,6 +73,7 @@ function handlePostRequest($conn) {
         $id = $_POST['id'];
         $title = $_POST['title'];
         $content = $_POST['content'];
+        $category = $_POST['category'];
         $image_url = $_POST['image_url'];
 
         $errors = validateInput($title, $content, $image_url, $category);
