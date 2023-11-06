@@ -5,18 +5,17 @@ include_once('libraries/db.php');
 $conn = new Database;
 $categories = $conn->select("SELECT * FROM categories");
 
-// if (isset($_SESSION['role'])) {
-//     if ($_SESSION['role'] != 1) {
-//         header("Location: index.php");
-//         exit;
-//     }
-// }else{
-//     header("Location: index.php");
-//     exit;
-// }
+if (isset($_SESSION['role'])) {
+    if ($_SESSION['role'] != 1) {
+        header("Location: index.php");
+        exit;
+    }
+}else{
+    header("Location: index.php");
+    exit;
+}
 
 
-// IZVEIDOT CHECK VAI IR ADMINS VAI NAV LIETOJOT role_id no user tabulas
 ?>
 
 <!DOCTYPE html>
