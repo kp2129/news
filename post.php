@@ -13,17 +13,20 @@ $data = $database->single($id);
 $single = $data['data'];
 
 $data1 = $database->comments($id);
+
+
 $comment = $data1['data'];
 
 // echo '<pre>';
 // echo var_dump($single);
 // echo '</pre>';
-print_r($single[0]);
+// print_r($single[0]);
 if(!empty($single[0][8])){
     $img = json_decode($single[0][8]);
 }
 
-$data1 = $database->suggestion($single[0][6]);
+$data2 = $database->suggestion($single[0][5]);
+// print_r($data1);
 $count = count($data1);
 
 
@@ -110,10 +113,10 @@ $count = count($data1);
             <p class="suggestions-title">
                 Priekš Jums
             </p>
-            <?php foreach($data1 as $sugg){
+            <?php foreach($data2 as $sugg){
                 if($sugg[0] != $single[0][0]){?>
             <a href="?id=<?=$sugg[0]?>" class="m-post-container">
-                <img class="m-post-image" src="<?=$sugg[8]?>" alt="">
+                <img class="m-post-image" src="<?=$sugg[7]?>" alt="">
                 <p class="m-post-title"><?=$sugg[1]?></p>
             </a>
             <?php }} ?>
