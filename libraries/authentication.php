@@ -12,13 +12,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 login($conn, $username, $password);
             }
         } elseif ($_POST["action"] === "signup") {
-            if (isset($_POST["username"]) && isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["repeat"])) {
-                print_r($_POST);
-                // $username = $_POST["username"];
-                // $email = $_POST["email"];
-                // $password = $_POST["password"];
-                // $repeat = $_POST["repeat"];
-                // signUp($conn, $username, $email, $password, $repeat);
+            if (isset($_POST["username"]) && isset($_POST["email"]) && isset($_POST["password"])) {
+                $username = $_POST["username"];
+                $email = $_POST["email"];
+                $password = $_POST["password"];
+                signUp($conn, $username, $email, $password);
+            }
+        } elseif ($_POST["action"] === "logoff") {
+            if (isset($_SESSION['UId'])) {
+                session_destroy();
+                echo json_encode("success");
+                return;
+            } else {
+                echo json_encode("UId is not set");
             }
         }
     }
@@ -45,7 +51,7 @@ function login($conn, $username, $password)
     $result = $stmt->get_result();
 
     if ($result->num_rows == 0) {
-        $returnOBJ['error'] = 'Incorrect Password or Username';
+        $returnOBJ['error'] = 'Incorrect Password or Username.';
         echo json_encode($returnOBJ);
         return;
     }
@@ -81,57 +87,68 @@ function login($conn, $username, $password)
         echo json_encode($returnOBJ);
         return;
     } else {
-        $returnOBJ['error'] = 'Incorrect Password or Username';
+        $returnOBJ['error'] = 'Incorrect Password or Username.';
         echo json_encode($returnOBJ);
         return;
     }
 }
 
-function signUp($conn, $username, $email, $pass, $repeat)
+function signUp($conn, $username, $email, $pass)
 {
-    $obj = [
-        'error' => '',
-        'success' => false
-    ];
+    $returnOBJ = ["error" => "", "success" => false];
 
     if (empty($username)) {
-        $obj['error'] = 'Username is required.';
-        echo json_encode($obj);
+        $returnOBJ['error'] = 'Username is required.';
+        echo json_encode($returnOBJ);
         return;
     }
 
     if (empty($pass)) {
-        $obj['error'] = 'Password is required.';
-        echo json_encode($obj);
+        $returnOBJ['error'] = 'Password is required.';
+        echo json_encode($returnOBJ);
         return;
     }
 
-    if ($pass != $repeat) {
-        $obj['error'] = 'Passwords do not match!';
-    }
-
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $obj['error'] = 'Enter a valid email address!';
+        $returnOBJ['error'] = 'A valid email address is required.';
+        echo json_encode($returnOBJ);
+        return;
     }
 
-    if ($obj['error'] == '') {
-        $stmt = $conn->prepare("SELECT * FROM users_blog WHERE username = ?");
+    if ($returnOBJ['error'] == '') {
+        $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
         $stmt->bind_param('s', $username);
         $stmt->execute();
         $stmt->store_result();
+
         if ($stmt->num_rows === 0) {
             $stmt->close();
 
-            $emailExists = $conn->select("SELECT * FROM users_blog WHERE email = '$email'");
-            if (empty($emailExists)) {
-                $obj['success'] = true;
-            } else {
+            $emailExists = $conn->select("SELECT * FROM users WHERE email = '$email'");
+            if (!empty($emailExists)) {
                 // Email already exists
-                $obj['error'] = 'Email already in use';
+                $returnOBJ['error'] = 'Email already in use.';
+                echo json_encode($returnOBJ);
+                return;
             }
+
+            // successful registration
+            $stmt = $conn->prepare("INSERT INTO users (username, password, email) VALUES (?, ?, ?)");
+            $stmt->bind_param("sss", $username, $pass, $email);
+            $stmt->execute();
+
+            $returnOBJ['success'] = true;
+            echo json_encode($returnOBJ);
+            return;
         } else {
-            $obj['error'] = 'Username already taken!';
+            $returnOBJ['error'] = 'Username already taken.';
+            echo json_encode($returnOBJ);
+            return;
         }
+    } else {
+        $returnOBJ['error']  = 'Something went wrong.';
+
+        echo json_encode($returnOBJ);
+        return;
     }
-    echo json_encode($obj);
 }

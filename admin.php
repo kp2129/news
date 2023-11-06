@@ -5,6 +5,16 @@ include_once('libraries/db.php');
 $conn = new Database;
 $categories = $conn->select("SELECT * FROM categories");
 
+// if (isset($_SESSION['role'])) {
+//     if ($_SESSION['role'] != 1) {
+//         header("Location: index.php");
+//         exit;
+//     }
+// }else{
+//     header("Location: index.php");
+//     exit;
+// }
+
 
 // IZVEIDOT CHECK VAI IR ADMINS VAI NAV LIETOJOT role_id no user tabulas
 ?>
@@ -18,8 +28,8 @@ $categories = $conn->select("SELECT * FROM categories");
     <link rel="stylesheet" href="styles/navbar.css">
     <link rel="stylesheet" href="styles/admin.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="scripts/scripts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="scripts/scripts.js"></script>
 
     <title>Admin</title>
 </head>
@@ -48,34 +58,33 @@ $categories = $conn->select("SELECT * FROM categories");
                         <div class="input-container">
                             <p>Virsraksts</p>
                             <input type="text" name="title">
+                            <p id='err_title'></p>
                         </div>
                         <div class="input-container">
                             <p>Bilde</p>
                             <input type="text" name="image_url">
+                            <p id='err_img'></p>
                         </div>
-                        <div class="input-container">
-                            <p>Autors</p>
-                            <input type="text" name="author">
-                        </div>
+
                         <div class="input-container">
                             <p>Kategorija</p>
                             <select name="kategorija">
                                 <?php
-                                foreach($categories as $categorie){
-                                    echo "<option value=".$categorie[0].">".$categorie[1]."</option>";
+                                foreach ($categories as $categorie) {
+                                    echo "<option value=" . $categorie[0] . ">" . $categorie[1] . "</option>";
                                 }
                                 ?>
                             </select>
                         </div>
                         <div class="input-container">
                             <p>Saturs</p>
-                            <textarea  name="content" class='input-textarea' name="" id="" cols="30" rows="13"></textarea>
-                            
+                            <textarea name="content" class='input-textarea' name="" id="" cols="30" rows="13"></textarea>
+                            <p id='err_content'></p>
                         </div>
                 </div>
                 <div class="edit-bottom-container">
-                    <button class="edit-button button-style">Saglabāt</button>
-                    
+                    <button id='new-post-button' class="edit-button button-style add-post">Pievienot jaunu</button>
+
                 </div>
                 </form>
             </div>
@@ -84,3 +93,4 @@ $categories = $conn->select("SELECT * FROM categories");
 </body>
 
 </html>
+

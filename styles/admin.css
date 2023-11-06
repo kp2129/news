@@ -42,7 +42,7 @@
     align-items: end;
 }
 
-.admin-button {
+.admin-button, .edit-post-button {
     margin: 0.5rem 0rem 0.5rem 0.5rem;
 }
 
@@ -62,7 +62,7 @@
 .edit-container {
     background-color: var(--bg-other);
     border-radius: 15px;
-    height: 100%;
+    /* height: 100%; */
     padding: 0rem 2rem;
 
     display: flex;
@@ -76,8 +76,10 @@
 }
 
 .edit-bottom-container {
-    /* display: none; */
     width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
     text-align: center;
 }
 
@@ -115,7 +117,7 @@
     resize: none;
 }
 
-.edit-button {
+.edit-button , .new-post-button {
     background-color: var(--bg-other-darker);
     font-weight: bold;
     font-size: 1.1rem;
@@ -123,4 +125,8 @@
     justify-content: center;
     padding: 0.25rem 1rem;
     margin-bottom: 1.5rem;
+}
+
+#err_content, #err_img , #err_title{
+    color: red;
 }
