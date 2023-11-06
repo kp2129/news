@@ -28,7 +28,6 @@ if(!empty($single[0][8])){
 }
 
 $data2 = $database->suggestion($single[0][5]);
-// print_r($data1);
 $count = count($data2);
 
 $like = $database->ifliked($id, $uid);
