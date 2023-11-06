@@ -391,3 +391,94 @@ function comment(post, user, date) {
         },
     });
 }
+
+function comment(post, user, date) {
+    let contest = $("#contest").val();
+    let form = $("#comment-entry-container");
+
+    $.ajax({
+        url: "../libraries/comment.php",
+        type: "POST",
+        dataType: "json",
+        data: { constest: contest, post: post },
+        success: function (result) {
+            console.log(result);
+            if (result.msg == "") {
+                $("#errContest").text(result.errContest);
+                $("#msg").text("");
+            } else {
+                $("#errContest").text("");
+                $("#msg").text(result.msg);
+                form.append(
+                    `
+            <div class="comment-head">
+              <p class="comment-author">` +
+                        user +
+                        `</p>
+              <p class="comment-date">` +
+                        date +
+                        `</p>
+            </div>
+              <p class="comment-content">` +
+                        contest +
+                        `</p>
+          `
+                );
+            }
+        },
+        error: function (error) {
+            console.log(error.responseText);
+        },
+    });
+}
+
+function like(i, x, y){
+    let id = i;
+    let post = x;
+    let count = y+1;
+    let form = $('#like');
+    $.ajax({
+        url: "./libraries/like.php",
+        type: "POST",
+        dataType: "json",
+        data: {likeId: id, postId: post},
+        success: function(result){
+            console.log(result);
+            $('#like').remove();
+            $('#counted').remove();
+            form.append(`
+              <button onclick = "dislike(`+id+`,`+post+`,`+count+`)" id = "like">❤️ DISLIKE</button>
+              <p id = "counted">`+ count +`</p>
+            `);
+  
+        },
+        error: function(error){
+            console.log(error.responseText);
+        }
+    });
+  }
+  
+  function dislike(i, x, y){
+    let id = i;
+    let post = x;
+    let count = y-1;
+    let form = $('#like');
+    $.ajax({
+        url: "./libraries/like.php",
+        type: "POST",
+        dataType: "json",
+        data: {dislikeId: id, dispostId: post},
+        success: function(result){
+            console.log(result);
+            $('#like').remove();
+            $('#counted').remove();
+            form.append(`
+              <button onclick = "like(`+id+`,`+post+`,`+count+`)" id = "like">🤍 LIKE</button>
+              <p id = "counted">`+count+`</p>
+            `);
+        },
+        error: function(error){
+            console.log(error.responseText);
+        }
+    });
+  }

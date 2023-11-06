@@ -3,11 +3,13 @@ include_once('components/navbar.php');
 include('libraries/db.php');
 date_default_timezone_set('Europe/Riga');
 $date = date('Y-m-d h:i:s');
-
-
 $database = new Database();
 
+
+$_session['id'] = 3;
+
 $id = $_GET['id'];
+$uid = $_session['id'];
 
 $data = $database->single($id);
 $single = $data['data'];
@@ -28,6 +30,8 @@ if(!empty($single[0][8])){
 $data2 = $database->suggestion($single[0][5]);
 // print_r($data1);
 $count = count($data2);
+
+$like = $database->ifliked($id, $uid);
 
 ?>
 
@@ -62,7 +66,20 @@ $count = count($data2);
                 <i class="bi bi-hand-thumbs-up"><?= $single[0][9]?></i>
             </button>
             <img class="post-image" src="<?= $img[0] ?>" alt="">
-            <p class="post-title"><?= $single[0][1] ?></p>
+            
+            <div id = "like">
+            <?php if(empty($like)){ ?>
+                <button onclick = "like(<?=$uid?>,<?=$id?>,<?=$single[0][9]?>)" id = "like">🤍</button>
+                <p id = "counted"><?=$single[0][9]?></p>
+            <?php } elseif(!empty($like)) { ?>
+                <button onclick = "dislike(<?=$uid?>,<?=$id?>,<?=$single[0][9]?>)" id = "like">❤️</button>
+                <p id = "counted"><?=$single[0][9]?></p>
+            <?php }else{ ?>
+                <p>❤️<?=$single[0][9]?></p>
+            <?php } ?>
+            </div>
+
+            <p class="post-title"><?=$single[0][1]?></p>
 
             <div class="post-details-container">
                 <p class="post-details"><?= $single[0][6] ?> • <?= $single[0][3] ?> • <?= $single[0][5] ?></p>
