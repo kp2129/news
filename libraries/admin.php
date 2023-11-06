@@ -79,7 +79,7 @@ function handlePostRequest($conn) {
         $errors = validateInput($title, $content, $image_url, $category);
 
         if (empty($errors)) {
-            $result = updateArticle($conn, $id, $title, $content, $image_url);
+            $result = updateArticle($conn, $id, $title, $content, $image_url, $category);
             echo json_encode($result);
         } else {
             // Return validation errors as a JSON response
@@ -103,9 +103,9 @@ function handlePostRequest($conn) {
     }
 }
 
-function updateArticle($conn, $id, $title, $content, $image_url) {
-    $stmt = $conn->prepare("UPDATE news_articles SET title = ?, content = ? WHERE article_id = ?");
-    $stmt->bind_param("ssi", $title, $content, $id);
+function updateArticle($conn, $id, $title, $content, $image_url, $category) {
+    $stmt = $conn->prepare("UPDATE news_articles SET title = ?, content = ? , category_id = ? WHERE article_id = ?");
+    $stmt->bind_param("ssii", $title, $content,  $category , $id);
 
     if ($stmt->execute()) {
         // Now, update the image URL in the article_images table

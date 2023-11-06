@@ -22,9 +22,11 @@
                 echo '<button id="log-button" class="admin-button button-style">Admin Panel</button>';
 
             }
+            echo '<button id="log-button" class="logout-button button-style"> Log out</button>';
+        }else{
+            echo '<button id="log-button" class="login-button button-style"> Pieslēgties</button>';
         }
         ?>
-        <button id="log-button" class="login-button button-style"> Pieslēgties</button>
         <button class="filter-button s-button-style">
             <img src="svg/filter.svg" alt="filter">
         </button>

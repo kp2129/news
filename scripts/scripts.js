@@ -348,9 +348,13 @@ $(".login-button").click(function () {
     window.location.href = "login.php";
 });
 
-// $(".admin-button").click(function () {
-//   window.location.href = "admin.php";
-// });
+$(".admin-button").click(function () {
+  window.location.href = "admin.php";
+});
+
+$(".logout-button").click(function () {
+  window.location.href = "logout.php";
+});
 
 function comment(post, user, date) {
     let contest = $("#contest").val();
