@@ -70,12 +70,9 @@ $like = $database->ifliked($id, $uid);
             <div id = "like">
             <?php if(empty($like)){ ?>
                 <button onclick = "like(<?=$uid?>,<?=$id?>,<?=$single[0][9]?>)" id = "like">🤍</button>
-                <p id = "counted"><?=$single[0][9]?></p>
             <?php } elseif(!empty($like)) { ?>
                 <button onclick = "dislike(<?=$uid?>,<?=$id?>,<?=$single[0][9]?>)" id = "like">❤️</button>
-                <p id = "counted"><?=$single[0][9]?></p>
             <?php }else{ ?>
-                <p>❤️<?=$single[0][9]?></p>
             <?php } ?>
             </div>
 

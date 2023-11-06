@@ -155,4 +155,7 @@ p {
 }
 #like{
     cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    font-size: 25px;
 }
