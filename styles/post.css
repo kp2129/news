@@ -150,7 +150,7 @@ p {
 }
 
 .m-post-image {
-    border-radius: 15px;
+    border-radius: 15px 15px 0px 0px;
     width: 100%;
 }
 #like{
@@ -158,4 +158,9 @@ p {
     display: flex;
     flex-direction: row;
     font-size: 25px;
+}
+.m-post-title{
+    background-color: #c9c7c7;
+    border-radius: 0px 0px 15px 15px;
+    padding: 5px 0px;
 }
