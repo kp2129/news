@@ -23,7 +23,6 @@ $img = json_decode($single[0][9]);
 
 $data1 = $database->suggestion($single[0][6]);
 $count = count($data1);
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
