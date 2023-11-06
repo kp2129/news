@@ -80,6 +80,7 @@ function login($conn, $username, $password)
     // }
 
     if ($user['password'] == $password) {
+        session_start();
         $_SESSION["UId"] = $username;
         $_SESSION['id'] = $user['user_id'];
         $_SESSION['role'] = $user['role_id'];
