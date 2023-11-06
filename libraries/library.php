@@ -3,6 +3,9 @@ require_once("db.php");
 
 print_r($_POST);
 
+
+
+
 function Sync()
 {
     return $db = new Database();
@@ -46,8 +49,8 @@ function AdminPage()
         $result .= '
         <div class="post">
             <div class="post-image" style="background-image: linear-gradient(to bottom,transparent,rgba(0, 0, 0, 0.75)),url(' . $allPosts['images'][$i][0] . ');">
-                <button class="admin-button button-style">' . sizeof($likeCount) . ' <img src="svg/hand-thumbs-up-fill.svg" alt=""></button>
-                <button class="admin-button button-style" id="' . $content[0] . '">edit</button>
+                <button class="edit-post-button  button-style">' . sizeof($likeCount) . ' <img src="svg/hand-thumbs-up-fill.svg" alt=""></button>
+                <button class="edit-post-button  button-style" id="' . $content[0] . '">edit</button>
             </div>
             <p class="post-title">' . $content[1] . '</p>
 

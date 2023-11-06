@@ -18,12 +18,15 @@ $comment = $data1['data'];
 // echo '<pre>';
 // echo var_dump($single);
 // echo '</pre>';
-// print_r($single[0][8]);
-$img = json_decode($single[0][9]);
+print_r($single[0]);
+if(!empty($single[0][8])){
+    $img = json_decode($single[0][8]);
+}
 
 $data1 = $database->suggestion($single[0][6]);
 $count = count($data1);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,13 +55,13 @@ $count = count($data1);
         <!-- kreisā daļa (Post sadaļa) -->
         <div class="post-container">
             <button class="post-like-button button-style">
-                <i class="bi bi-hand-thumbs-up"></i>
+                <i class="bi bi-hand-thumbs-up"><?= $single[0][9]?></i>
             </button>
             <img class="post-image" src="<?= $img[0] ?>" alt="">
             <p class="post-title"><?= $single[0][1] ?></p>
 
             <div class="post-details-container">
-                <p class="post-details"><?= $single[0][7] ?> • <?= $single[0][3] ?> • <?= $single[0][10] ?></p>
+                <p class="post-details"><?= $single[0][6] ?> • <?= $single[0][3] ?> • <?= $single[0][5] ?></p>
                 <i class="bi bi-hand-thumbs-up-fill"></i>
             </div>
 
@@ -75,7 +78,7 @@ $count = count($data1);
                 </p>
                 <!-- forma -->
                 <div class="comment-submit-container">
-                <?php if(isset($_SESSION['Uid'])){ ?>
+                <?php if(isset($_SESSION['UId'])){ ?>
                     <textarea name="" id="contest" cols="30" rows="10" class="comment-input">Ievadi komentāru!</textarea>
                     <button class="comment-submit-button button-style" onclick = "comment($_GET['id'], $_SESSION['Uid'], $date)">Publicēt</button>
                     <p id = "errContest"></p>
